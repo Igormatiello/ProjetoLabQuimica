@@ -1,0 +1,54 @@
+version: '3.1'
+
+services:
+
+  frontend_server:
+    image: ${FRONTEND}
+    container_name: frontend_server
+    environment:
+      - TZ=${TIMEZONE}
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend_server
+    networks:
+      - production-network
+
+  backend_server:
+    image: ${BACKEND}
+    container_name: backend_server
+    restart: always
+    ports:
+      - "12000:12000"
+    depends_on:
+      - postgres_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: ${TIMEZONE}
+    networks:
+      - production-network
+
+
+  postgres_db:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ${POSTGRES_DATA_DIR}:/var/lib/postgresql/data
+    networks:
+      - production-network
+
+
+networks:
+  production-network:
+    driver: bridge
