@@ -4,7 +4,7 @@ import br.edu.utfpr.pb.labquimica.backend.model.Indicadores;
 import br.edu.utfpr.pb.labquimica.backend.service.HomeService;
 import br.edu.utfpr.pb.labquimica.backend.utils.DateUtil;
 
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +23,7 @@ public class HomeController {
     public Indicadores findDadosIndicadores(@RequestParam("dtIni") String dtIni,
                                             @RequestParam("dtFim") String dtFim) {
         return homeService.findDadosIndicadores(
-                DateTimeFormatter.ofPattern( dtIni),  DateTimeFormatter.ofPattern(dtFim)
+                LocalDate.parse(dtIni), LocalDate.parse(dtFim) //modificado do original
         );
     }
 }

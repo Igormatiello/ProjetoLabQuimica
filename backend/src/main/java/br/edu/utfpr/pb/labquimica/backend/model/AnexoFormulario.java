@@ -44,7 +44,7 @@ public class AnexoFormulario implements Serializable {
     private String descricao;
 
     @Column(nullable = false)
-    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)  
     @JsonSerialize(using = LocalDateSerializer.class)
     @NotNull(message = ValidationMessages.DataUploadNaoPodeSerVazio)
     private LocalDate dataUpload;
