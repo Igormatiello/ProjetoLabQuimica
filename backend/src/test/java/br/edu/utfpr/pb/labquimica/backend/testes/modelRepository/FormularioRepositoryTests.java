@@ -80,6 +80,37 @@ public class FormularioRepositoryTests {
 		
 		
 	}
+	@Test
+	public void deveBuscarUmFormualarioPorStatus() {
+		Formulario formulario= criarEPersistirFormulario();
+		
+		
+		java.util.List<Formulario> formularioAguardandoAnalise= 
+		repository.findByStatusOrderByDataSolicitacaoDesc(formulario.getStatus().AGUARDANDO_ANALISE);
+		
+		java.util.List<Formulario> formularioAguardandoAmostra= 
+		repository.findByStatusOrderByDataSolicitacaoDesc(formulario.getStatus().AGUARDANDO_AMOSTRA);
+	
+		java.util.List<Formulario> formularioAmostraRecusada= 
+		repository.findByStatusOrderByDataSolicitacaoDesc(formulario.getStatus().AMOSTRA_RECUSADA);
+		
+		java.util.List<Formulario> formularioEmAnalise= 
+		repository.findByStatusOrderByDataSolicitacaoDesc(formulario.getStatus().EM_ANALISE);
+		
+		java.util.List<Formulario> formularioFinalizado= 
+		repository.findByStatusOrderByDataSolicitacaoDesc(formulario.getStatus().FINALIZADO);
+		
+		Assertions.assertThat(formularioAguardandoAnalise).isNotNull();
+		
+		Assertions.assertThat(formularioAguardandoAmostra).isNull();
+		Assertions.assertThat(formularioAmostraRecusada).isNull();
+		Assertions.assertThat(formularioEmAnalise).isNull();
+		Assertions.assertThat(formularioFinalizado).isNull();
+		
+		
+	}
+	
+	
 	
 	
 	@Test

@@ -88,19 +88,30 @@ public void deveAtualizarUmUsuario() {
 	pessoa.setEndereco("new ed");
 	usuario.setPessoa(pessoa);
 
+	java.util.Set<Papel> papeis;
+	papeis=new HashSet<Papel>();
+	
+	Papel papel1 = new Papel();
+	papel1.setId(2l);
+	papel1.setNome("papel n2");
+	
+	Papel papel2 = new Papel();
+	papel2.setId(1l);
+	papel2.setNome("papel n1");
+	
+	usuario.setPapeis(papeis);
+	
 	repository.save(usuario);
 	
-
 	Usuario usuarioAtualizado = entityManager.find(Usuario.class, usuario.getId());
-	
 	
 	Assertions.assertThat(usuarioAtualizado.getPassword()).isEqualTo("senha atual");
 	Assertions.assertThat(usuarioAtualizado.getUsername()).isEqualTo("usuario atual");
 	Assertions.assertThat(usuarioAtualizado.getPessoa().getCep()).isEqualTo("22222");
 	Assertions.assertThat(usuarioAtualizado.getPessoa().getNome()).isEqualTo("igor");
 	Assertions.assertThat(usuarioAtualizado.getPessoa().getEndereco()).isEqualTo("new ed");
-	
-	
+	Assertions.assertThat(usuarioAtualizado.getPapeis().contains(papel2));
+	Assertions.assertThat(usuarioAtualizado.getPapeis().contains(papel1));
 }
 
 
@@ -128,15 +139,25 @@ private Usuario criarEPersistirUmUsuario() {
 		
 		List<PessoaInstituicao> listaVinculos = new ArrayList<>();
 		
-		Papel papeis = new Papel();
-		Set <Papel> papeis= new ArrayList<>();
 		
+		
+		
+		
+	
+	
+		java.util.Set<Papel> papeis;
 		papeis=new HashSet<Papel>();
 		
+		Papel papel1 = new Papel();
+		papel1.setId(1l);
+		papel1.setNome("papel n1");
 		
+		Papel papel2 = new Papel();
+		papel2.setId(2l);
+		papel2.setNome("papel n2");
 		
-		
-		
+		papeis.add(papel1);
+		papeis.add(papel2);
 		
 		Pessoa pessoa = new Pessoa();
 		pessoa.setId(1L);

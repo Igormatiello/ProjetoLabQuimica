@@ -1,5 +1,7 @@
 package br.edu.utfpr.pb.labquimica.backend.testes.modelRepository;
 
+import java.util.HashSet;
+
 import org.assertj.core.api.Assertions;
 import org.hibernate.mapping.Set;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.edu.utfpr.pb.labquimica.backend.enumerators.UnidadeMedidaCobrancaEquipamento;
 import br.edu.utfpr.pb.labquimica.backend.model.Cidade;
 import br.edu.utfpr.pb.labquimica.backend.model.Equipamento;
+import br.edu.utfpr.pb.labquimica.backend.model.Papel;
 import br.edu.utfpr.pb.labquimica.backend.model.ProgramaEnsino;
 import br.edu.utfpr.pb.labquimica.backend.model.Servico;
 import br.edu.utfpr.pb.labquimica.backend.repository.CidadeRepository;
@@ -79,15 +82,11 @@ public class EquipamentoRepositoryTests {
 	
 	
 	
-	
-
-	
 	@Test
 	public void deveAtualizarUmEquipamento() {
 		
 		Equipamento equipamento= criarEPersistirEquipamento();
 		
-	
 		equipamento.setNome("novo");
 		equipamento.setSigla("N");
 		equipamento.setMetodologia("nova");
@@ -99,9 +98,15 @@ public class EquipamentoRepositoryTests {
 		equipamento.setValorExterno(111e11);
 		equipamento.setUnidadeMedidaPadrao(UnidadeMedidaCobrancaEquipamento.Hora);
 		equipamento.setValorPadrao(121e11);
-		equipamento.setServicos(null);//necessita reparo
+
+		java.util.Set<Servico> servicos;
 		
-	
+		servicos = new HashSet<Servico>();
+		
+		Servico servico1 = new Servico();
+		servico1.setDescricao("descrição 3");
+		
+		equipamento.setServicos(servicos);
 		repository.save(equipamento);
 		
 		
@@ -119,7 +124,7 @@ public class EquipamentoRepositoryTests {
 		Assertions.assertThat(equipamento2.getValorExterno()).isEqualTo(111e11);
 		Assertions.assertThat(equipamento2.getUnidadeMedidaPadrao()).isEqualTo(UnidadeMedidaCobrancaEquipamento.Hora);
 		Assertions.assertThat(equipamento2.getValorPadrao()).isEqualTo(121e11);
-		Assertions.assertThat(equipamento2.getServicos());//necessita reparo
+		Assertions.assertThat(equipamento2.getServicos().contains(servico1));
 	}
 	
 	
@@ -138,9 +143,19 @@ public class EquipamentoRepositoryTests {
 	
 	public static Equipamento criarEquipamento() {
 		
-		Servico servicos = new Servico();
-		Set <Servico> servicos = new ArrayList<>();
+		
+		java.util.Set<Servico> servicos;
+		
+		servicos = new HashSet<Servico>();
+		
+		Servico servico1 = new Servico();
+		servico1.setDescricao("descrição 1");
+		
+		Servico servico2 = new Servico();
+		servico2.setDescricao("descrição 2");
 				
+		servicos.add(servico1);
+		servicos.add(servico2);
 		return
 				Equipamento
 				.builder()

@@ -142,8 +142,9 @@ public class PessoaRepositoryTests {
 		assertThat(pessoaAtualizada.getEndereco()).isEqualTo("novo endereço");
 		assertThat(pessoaAtualizada.getCelular()).isEqualTo("1212");
 		assertThat(pessoaAtualizada.getUsuario().getId()).isEqualTo(4l);
-		assertThat(pessoaAtualizada.getVinculos().get(0).getId()).isEqualTo(3L);
-		assertThat(pessoaAtualizada.getVinculos().get(0))
+		assertThat(pessoaAtualizada.getVinculos().get(0).getId()).isEqualTo(2L);
+		assertThat(pessoaAtualizada.getVinculos().get(1).getId()).isEqualTo(3L);
+		
 	}
 	
 
