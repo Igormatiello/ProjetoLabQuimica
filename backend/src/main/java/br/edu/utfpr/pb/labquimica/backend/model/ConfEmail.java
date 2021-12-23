@@ -2,6 +2,7 @@ package br.edu.utfpr.pb.labquimica.backend.model;
 
 import br.edu.utfpr.pb.labquimica.backend.utils.DefaultFields;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")

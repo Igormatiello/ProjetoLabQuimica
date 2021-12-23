@@ -24,6 +24,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor

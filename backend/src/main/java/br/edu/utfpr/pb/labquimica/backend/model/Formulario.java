@@ -26,6 +26,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor

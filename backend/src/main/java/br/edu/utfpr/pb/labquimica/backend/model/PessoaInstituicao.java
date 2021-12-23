@@ -15,6 +15,7 @@ import java.io.Serializable;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table
