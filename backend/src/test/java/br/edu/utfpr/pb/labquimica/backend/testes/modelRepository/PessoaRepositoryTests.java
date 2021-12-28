@@ -17,9 +17,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
 import br.edu.utfpr.pb.labquimica.backend.model.Cidade;
 import br.edu.utfpr.pb.labquimica.backend.model.Pessoa;
 import br.edu.utfpr.pb.labquimica.backend.model.PessoaInstituicao;
+import br.edu.utfpr.pb.labquimica.backend.model.SolicitacaoCadastro;
 import br.edu.utfpr.pb.labquimica.backend.model.Usuario;
 import br.edu.utfpr.pb.labquimica.backend.repository.CidadeRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.PessoaRepository;
@@ -55,7 +57,7 @@ public class PessoaRepositoryTests {
 	public void deverRetornarFalsoQuandoNaoHouverUmaPessoaNaBaseDeDados() {
 		
 		
-		boolean resultado =repository.existsById(1L);
+		boolean resultado =repository.existsById(1000L);
 		
 		Assertions.assertThat(resultado).isFalse();		
 		
@@ -76,7 +78,7 @@ public class PessoaRepositoryTests {
 	public void deveRetornarFalsoAoBuscarUmaPessoaPorIdNaoCadastrada() {
 		
 		
-		boolean resultado= repository.existsById(10L);
+		boolean resultado= repository.existsById(1000L);
 				
 		assertThat(resultado).isFalse();
 
@@ -194,8 +196,16 @@ public void deveDeletarUmaPessoa() {
 		Usuario usuario = new Usuario();
 		usuario.setId(1L);
 		
+		
+		
+		
+		SolicitacaoCadastro solicitacaoCadastro = new SolicitacaoCadastro();
+		solicitacaoCadastro.setCpfOrientador("000");
+		
+		
 		return Pessoa
 				.builder()
+				.tipoPessoa(TipoPessoa.Fisica)
 				.nome("pessoa1")
 				.documento("6666")
 				.cep("1111")
@@ -211,7 +221,7 @@ public void deveDeletarUmaPessoa() {
 				.ehAtivo(true)
 				.cidade(cidade)
 				.vinculos(listaVinculos)
-				//.solicitacaoCadastro()
+				.solicitacaoCadastro(solicitacaoCadastro)
 				.usuario(usuario)
 				.build();
 				

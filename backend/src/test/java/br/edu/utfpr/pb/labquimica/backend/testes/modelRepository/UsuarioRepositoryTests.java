@@ -50,14 +50,14 @@ public class UsuarioRepositoryTests {
 @Test
 	
 	public void deveSalvarUmUsuarioNaBaseDeDados() {
-		//cenario
+
 		Usuario usuario = criarEPersistirUmUsuario();
 					
-		//ação
+		
 		
 		Usuario usuarioSalvo = repository.save(usuario);
 	
-		//verificação
+	
 		
 		Assertions.assertThat(usuarioSalvo.getId()).isNotNull();
 	}
@@ -139,9 +139,17 @@ private Usuario criarEPersistirUmUsuario() {
 		
 		List<PessoaInstituicao> listaVinculos = new ArrayList<>();
 		
+		PessoaInstituicao lista1 = new PessoaInstituicao();
+		lista1.setCreditoVigente(1000D);
+		lista1.setEhAtivo(false);
 		
+		listaVinculos.add(lista1);
 		
+		PessoaInstituicao lista2= new PessoaInstituicao();
+		lista2.setCreditoVigente(2000D);
+		lista2.setEhAtivo(true);
 		
+		listaVinculos.add(lista2);
 		
 	
 	
@@ -164,6 +172,7 @@ private Usuario criarEPersistirUmUsuario() {
 		pessoa.setNome("usuario1");
 		pessoa.setDocumento("documento 1");
 		pessoa.setCep("11111111");
+		pessoa.setVinculos(listaVinculos);		
 		pessoa.setEndereco("avenida brasil");
 		pessoa.setBairro("centro");
 		pessoa.setNumero("112");

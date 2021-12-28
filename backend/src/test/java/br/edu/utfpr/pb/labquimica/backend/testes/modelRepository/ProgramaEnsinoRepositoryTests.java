@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.edu.utfpr.pb.labquimica.backend.model.Cidade;
 import br.edu.utfpr.pb.labquimica.backend.model.ProgramaEnsino;
 import br.edu.utfpr.pb.labquimica.backend.repository.CidadeRepository;
+import br.edu.utfpr.pb.labquimica.backend.repository.ProgramaEnsinoRepository;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -23,7 +24,7 @@ public class ProgramaEnsinoRepositoryTests {
 
 	
 	@Autowired
-	ProgramaEnsinoRepositoryTests repository;
+	ProgramaEnsinoRepository repository;
 	
 	@Autowired
 	TestEntityManager entityManager;
@@ -61,7 +62,7 @@ public class ProgramaEnsinoRepositoryTests {
 		
 		
 		
-		java.util.Optional<Cidade> ProgramaEnsinoEncontrado= repository.findById(programaEnsino.getId());
+		java.util.Optional<ProgramaEnsino> ProgramaEnsinoEncontrado= repository.findById(programaEnsino.getId());
 		
 		
 		Assertions.assertThat(ProgramaEnsinoEncontrado.isPresent()).isNotNull();
@@ -79,10 +80,8 @@ public class ProgramaEnsinoRepositoryTests {
 		
 		ProgramaEnsino programaEnsino= criarEPersistirUmProgramaEnsino();
 		
-		programaEnsino
-		.setSigla("TC");
-		.setNome("Trabalho Cientifico");
-		
+		programaEnsino.setSigla("TC");
+		programaEnsino.setNome("Trabalho Científico");
 		
 		
 		repository.save(programaEnsino);
