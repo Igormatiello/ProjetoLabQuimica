@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.google.common.base.Optional;
 
+import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
 import br.edu.utfpr.pb.labquimica.backend.model.Papel;
 import br.edu.utfpr.pb.labquimica.backend.model.Pessoa;
 import br.edu.utfpr.pb.labquimica.backend.model.PessoaInstituicao;
@@ -127,6 +128,17 @@ public void deveBuscarUmUsuarioPorId() {
 }
 
 
+@Test
+public void deveBuscarUmUsuarioPorUsername() {
+	
+	
+	Usuario usuario = criarEPersistirUmUsuario();
+	java.util.Optional<Usuario> lancamentoEncontrado= repository.findByUsername(usuario.getUsername());
+			
+	assertThat(lancamentoEncontrado.isPresent()).isTrue();
+
+}
+
 
 	
 private Usuario criarEPersistirUmUsuario() {
@@ -168,7 +180,7 @@ private Usuario criarEPersistirUmUsuario() {
 		papeis.add(papel2);
 		
 		Pessoa pessoa = new Pessoa();
-		pessoa.setId(1L);
+		pessoa.setTipoPessoa(TipoPessoa.Fisica);
 		pessoa.setNome("usuario1");
 		pessoa.setDocumento("documento 1");
 		pessoa.setCep("11111111");
@@ -184,6 +196,7 @@ private Usuario criarEPersistirUmUsuario() {
 		pessoa.setDataCriacao(LocalDate.now());
 		pessoa.setEhAtivo(true);
 		pessoa.setCidade(null);
+		pessoa.setSolicitacaoCadastro(null);
 		
 		
 		
