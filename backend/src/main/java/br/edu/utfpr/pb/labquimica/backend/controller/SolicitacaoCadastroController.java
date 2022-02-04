@@ -4,6 +4,7 @@ import br.edu.utfpr.pb.labquimica.backend.exceptions.NotImplementedException;
 import br.edu.utfpr.pb.labquimica.backend.model.Pessoa;
 import br.edu.utfpr.pb.labquimica.backend.model.SolicitacaoCadastro;
 import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
+import br.edu.utfpr.pb.labquimica.backend.service.ServicoService;
 import br.edu.utfpr.pb.labquimica.backend.service.SolicitacaoCadastroService;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.SolicitacaoCadastroViewModel;
@@ -21,9 +22,13 @@ import java.util.List;
 @RequestMapping("solicitacao-cadastro")
 public class SolicitacaoCadastroController extends CrudController<SolicitacaoCadastro, Long> {
 
-    @Autowired
+   
     private SolicitacaoCadastroService solicitacaoCadastroService;
 
+    public   SolicitacaoCadastroController(SolicitacaoCadastroService solicitacaoCadastroService) {
+        this.solicitacaoCadastroService =solicitacaoCadastroService;
+   }
+    
     @Override
     protected CrudService<SolicitacaoCadastro, Long> getService() {
         return solicitacaoCadastroService;

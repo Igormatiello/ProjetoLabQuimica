@@ -3,6 +3,7 @@ package br.edu.utfpr.pb.labquimica.backend.controller;
 import br.edu.utfpr.pb.labquimica.backend.model.CreditoProfessor;
 import br.edu.utfpr.pb.labquimica.backend.model.Pessoa;
 import br.edu.utfpr.pb.labquimica.backend.repository.CreditoProfessorRepository;
+import br.edu.utfpr.pb.labquimica.backend.service.ConfEmailService;
 import br.edu.utfpr.pb.labquimica.backend.service.CreditoProfessorService;
 import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
@@ -16,11 +17,24 @@ import java.util.List;
 @RequestMapping("creditoProfessor")
 public class CreditoProfessorController extends CrudController<CreditoProfessor, Long> {
 
-    @Autowired
+    
     private CreditoProfessorService creditoProfessorService;
+    
+    public CreditoProfessorController(CreditoProfessorService creditoProfessorService) {
+        this.creditoProfessorService =creditoProfessorService;
+        
+   }
+    
 
-    @Autowired
+    
     private CreditoProfessorRepository creditoProfessorRepository;
+    
+    public CreditoProfessorController(CreditoProfessorRepository creditoProfessorRepository) {
+        this.creditoProfessorRepository =creditoProfessorRepository;
+        
+   }
+    
+    
 
     @Override
     protected CrudService<CreditoProfessor, Long> getService() {

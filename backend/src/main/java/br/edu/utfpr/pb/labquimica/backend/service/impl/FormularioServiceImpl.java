@@ -4,6 +4,7 @@ import br.edu.utfpr.pb.labquimica.backend.enumerators.StatusFormulario;
 import br.edu.utfpr.pb.labquimica.backend.model.Formulario;
 import br.edu.utfpr.pb.labquimica.backend.model.IndicadorFormularioByDay;
 import br.edu.utfpr.pb.labquimica.backend.repository.FormularioRepository;
+import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.FormularioService;
 import br.edu.utfpr.pb.labquimica.backend.utils.ValidationMessages;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.FormularioAnaliseViewModel;
@@ -18,9 +19,16 @@ import java.util.List;
 @Service
 public class FormularioServiceImpl extends CrudServiceImpl<Formulario, Long> implements FormularioService {
 
-    @Autowired
+    
     private FormularioRepository formularioRepository;
-
+    
+    
+    public FormularioServiceImpl(FormularioRepository formularioRepository) {
+        this.formularioRepository = formularioRepository;
+        }
+    
+    
+    
     @Override
     protected JpaRepository<Formulario, Long> getRepository() {
         return formularioRepository;

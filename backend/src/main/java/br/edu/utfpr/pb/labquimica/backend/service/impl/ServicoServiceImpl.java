@@ -1,6 +1,7 @@
 package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
 import br.edu.utfpr.pb.labquimica.backend.model.Servico;
+import br.edu.utfpr.pb.labquimica.backend.repository.EquipamentoRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.ServicoRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,13 @@ import java.util.List;
 @Service
 public class ServicoServiceImpl extends CrudServiceImpl<Servico, Integer> implements ServicoService {
 
-	@Autowired
+	
 	private ServicoRepository servicoRepository;
+	
+	public ServicoServiceImpl(ServicoRepository servicoRepository) {
+	    this.servicoRepository = servicoRepository;
+	    }
+	
 	
 	@Override
 	protected JpaRepository<Servico, Integer> getRepository() {

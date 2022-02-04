@@ -1,5 +1,6 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
+import br.edu.utfpr.pb.labquimica.backend.service.ParticipacaoProgramaEnsinoService;
 import br.edu.utfpr.pb.labquimica.backend.service.UsuarioService;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.DadosPessoaViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,20 @@ import java.security.Principal;
 @RequestMapping("session")
 public class PrincipalController {
 
-	@Autowired
+	
 	private UserAccessor usuarioAccessor;
+	 
+	public  PrincipalController(UserAccessor usuarioAccessor) {
+	        this.usuarioAccessor =usuarioAccessor;
+	   }
 
-	@Autowired
+	
 	private UsuarioService usuarioService;
+	
+	public  PrincipalController(UsuarioService usuarioService) {
+        this.usuarioService =usuarioService;
+   }
+	
 
 	@GetMapping("user-info")
 	public Principal principal(Principal principal) {

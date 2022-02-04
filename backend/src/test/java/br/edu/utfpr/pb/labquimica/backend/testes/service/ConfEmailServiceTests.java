@@ -55,13 +55,16 @@ public class ConfEmailServiceTests {
 		
 		repository.save(conf1);
 		repository.save(conf2);
+	
+		service.save(conf1);
+		service.save(conf2);
 		
 		Mockito.when(service.findConfig()).thenReturn(conf1,conf2);
 		
-		   Mockito.when(service.findConfig()).thenReturn( conf1,conf2);
+	
    		
-		
-		
+		ConfEmail resultado = service.findConfig();
+	Assertions.assertThat(resultado).isNotNull();
 		
 	}
 	

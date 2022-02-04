@@ -2,10 +2,12 @@ package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
 import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
 import br.edu.utfpr.pb.labquimica.backend.model.*;
+import br.edu.utfpr.pb.labquimica.backend.repository.EquipamentoRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.PessoaRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.ProgramaEnsinoRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.EmailService;
+import br.edu.utfpr.pb.labquimica.backend.service.PessoaInstituicaoService;
 import br.edu.utfpr.pb.labquimica.backend.service.PessoaService;
 import br.edu.utfpr.pb.labquimica.backend.utils.Email;
 import br.edu.utfpr.pb.labquimica.backend.utils.StringUtils;
@@ -25,22 +27,86 @@ import java.util.HashSet;
 public class PessoaServiceImpl extends CrudServiceImpl<Pessoa, Long> implements PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
-    @Autowired
+    
+    
+    public PessoaServiceImpl(PessoaRepository pessoaRepository) {
+	    this.pessoaRepository = pessoaRepository;
+	    }
+    
+    
+    
+    
+
     private UsuarioServiceImpl usuarioService;
-    @Autowired
+    
+    public PessoaServiceImpl(UsuarioServiceImpl usuarioService) {
+    	this.usuarioService=usuarioService;
+		
+    }
+    
+   
     private InstituicaoRepository instituicaoRepository;
-    @Autowired
+    
+    public PessoaServiceImpl(InstituicaoRepository instituicaoRepository) {
+    	this.instituicaoRepository=instituicaoRepository;
+    }
+    	
+    	
+
     private ProgramaEnsinoRepository programaEnsinoRepository;
-    @Autowired
+    
+    
+    public PessoaServiceImpl(ProgramaEnsinoRepository programaEnsinoRepository) {
+    	this.programaEnsinoRepository=programaEnsinoRepository;
+    }
+    
+    
+    
     private PessoaInstituicaoServiceImpl pessoaInstituicaoService;
-    @Autowired
+    
+    public PessoaServiceImpl(PessoaInstituicaoServiceImpl pessoaInstituicaoService) {
+    	this.pessoaInstituicaoService=pessoaInstituicaoService;
+    }
+    
+    
+    
+    
+    
+   
     private SolicitacaoCadastroServiceImpl solicitacaoCadastroService;
-    @Autowired
+    
+    
+    public PessoaServiceImpl(SolicitacaoCadastroServiceImpl solicitacaoCadastroService) {
+    	this.solicitacaoCadastroService=solicitacaoCadastroService;
+    }
+    
+    
+    
+   
     private ParticipacaoProgramaEnsinoServiceImpl participacaoProgramaEnsinoService;
-    @Autowired
+    
+    public PessoaServiceImpl(ParticipacaoProgramaEnsinoServiceImpl participacaoProgramaEnsinoService) {
+    	this.participacaoProgramaEnsinoService=participacaoProgramaEnsinoService;
+    }
+    
+    
+    
+    
     private PapelServiceImpl papelService;
-    @Autowired
+    
+    public PessoaServiceImpl(PapelServiceImpl papelService) {
+    	this.papelService=papelService;
+    }
+    
+    
+    
+  
     private EmailService emailService;
+    
+    public PessoaServiceImpl(EmailService emailService) {
+    	this.emailService=emailService;
+    }
+    
 
     @Override
     protected JpaRepository<Pessoa, Long> getRepository() {

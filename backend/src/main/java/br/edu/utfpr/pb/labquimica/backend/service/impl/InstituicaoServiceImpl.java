@@ -10,11 +10,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class InstituicaoServiceImpl extends CrudServiceImpl<Instituicao, Integer> implements InstituicaoService {
 
-    @Autowired
+    
     private InstituicaoRepository instituicaoRepository;
 
+    
+    public InstituicaoServiceImpl(InstituicaoRepository instituicaoRepository) {
+    this.instituicaoRepository = instituicaoRepository;
+    }
+    
+    
     @Override
     protected JpaRepository<Instituicao, Integer> getRepository() {
         return instituicaoRepository;
+        
     }
 }

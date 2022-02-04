@@ -3,6 +3,7 @@ package br.edu.utfpr.pb.labquimica.backend.service.impl;
 import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
 import br.edu.utfpr.pb.labquimica.backend.model.SolicitacaoCadastro;
 import br.edu.utfpr.pb.labquimica.backend.repository.EquipamentoRepository;
+import br.edu.utfpr.pb.labquimica.backend.repository.ProgramaEnsinoRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.SolicitacaoCadastroRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.ConfEmailService;
 import br.edu.utfpr.pb.labquimica.backend.service.EmailService;
@@ -24,14 +25,29 @@ import java.util.List;
 @Service
 public class SolicitacaoCadastroServiceImpl extends CrudServiceImpl<SolicitacaoCadastro, Long> implements SolicitacaoCadastroService {
 
-    @Autowired
+ 
     private SolicitacaoCadastroRepository solicitacaoCadastroRepository;
 
-    @Autowired
+    public SolicitacaoCadastroServiceImpl(SolicitacaoCadastroRepository solicitacaoCadastroRepository) {
+	    this.solicitacaoCadastroRepository = solicitacaoCadastroRepository;
+	    }
+    
+    
     private PessoaServiceImpl pessoaService;
 
-    @Autowired
+    public SolicitacaoCadastroServiceImpl(PessoaServiceImpl pessoaService) {
+	    this.pessoaService =pessoaService;
+	    }
+    
+    
+    
     private EmailService emailService;
+    
+    public SolicitacaoCadastroServiceImpl(EmailService emailService) {
+	    this.emailService =emailService;
+	    }
+    
+    
 
     @Override
     protected JpaRepository<SolicitacaoCadastro, Long> getRepository() {

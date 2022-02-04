@@ -1,6 +1,7 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 
 import br.edu.utfpr.pb.labquimica.backend.model.Indicadores;
+import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
 import br.edu.utfpr.pb.labquimica.backend.service.HomeService;
 import br.edu.utfpr.pb.labquimica.backend.utils.DateUtil;
 
@@ -16,8 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("home")
 public class HomeController {
 
-    @Autowired
+  
     private HomeService homeService;
+    
+    public HomeController( HomeService homeService) {
+        this.homeService =homeService;
+   }
+    
 
     @GetMapping("find-dados-indicadores")
     public Indicadores findDadosIndicadores(@RequestParam("dtIni") String dtIni,

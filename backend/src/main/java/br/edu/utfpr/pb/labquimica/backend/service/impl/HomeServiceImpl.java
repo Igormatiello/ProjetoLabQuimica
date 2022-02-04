@@ -3,6 +3,7 @@ package br.edu.utfpr.pb.labquimica.backend.service.impl;
 import br.edu.utfpr.pb.labquimica.backend.enumerators.StatusFormulario;
 import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
 import br.edu.utfpr.pb.labquimica.backend.model.*;
+import br.edu.utfpr.pb.labquimica.backend.repository.EquipamentoRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.FormularioService;
 import br.edu.utfpr.pb.labquimica.backend.service.HomeService;
 import br.edu.utfpr.pb.labquimica.backend.service.SolicitacaoCadastroService;
@@ -20,9 +21,16 @@ public class HomeServiceImpl implements HomeService {
     @Autowired
     private FormularioService formularioService;
 
-    @Autowired
-    private SolicitacaoCadastroService solicitacaoCadastroService;
+    public HomeServiceImpl(FormularioService formularioService) {
+	    this.formularioService = formularioService;
+	    }
+    
    
+    private SolicitacaoCadastroService solicitacaoCadastroService;
+    
+    public HomeServiceImpl(SolicitacaoCadastroService solicitacaoCadastroService) {
+	    this.solicitacaoCadastroService =solicitacaoCadastroService;
+	    }
     
     @Override
     public Indicadores findDadosIndicadores(LocalDate dtIni, LocalDate dtFim) {

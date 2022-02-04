@@ -20,10 +20,22 @@ public class HistoricoCreditoController extends CrudController<HistoricoCredito,
 
     @Autowired
     private HistoricoCreditoService historicoCreditoService;
+    
+    public HistoricoCreditoController( HistoricoCreditoService historicoCreditoService) {
+        this.historicoCreditoService =historicoCreditoService;
+   }
+    
+    
 
-    @Autowired
+  
     private UserAccessor usuarioAccessor;
 
+    public HistoricoCreditoController( UserAccessor usuarioAccessor) {
+        this.usuarioAccessor =usuarioAccessor;
+   }
+    
+    
+    
     @Override
     protected CrudService<HistoricoCredito, Long> getService() {
         return historicoCreditoService;

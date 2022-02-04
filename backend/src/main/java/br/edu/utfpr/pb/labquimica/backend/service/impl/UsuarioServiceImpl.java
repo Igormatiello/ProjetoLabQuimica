@@ -2,6 +2,7 @@ package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
 import br.edu.utfpr.pb.labquimica.backend.model.Pessoa;
 import br.edu.utfpr.pb.labquimica.backend.model.Usuario;
+import br.edu.utfpr.pb.labquimica.backend.repository.EquipamentoRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.PessoaInstituicaoRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.PessoaRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.UsuarioRepository;
@@ -16,14 +17,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioServiceImpl extends CrudServiceImpl<Usuario, Long> implements UsuarioService {
 
-	@Autowired
+	
 	private UsuarioRepository userRepository;
+	
+	
+	public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+	    this.userRepository = usuarioRepository;
+	    }
 
-	@Autowired
+	
 	private PessoaRepository pessoaRepository;
-
-	@Autowired
+	
+	public UsuarioServiceImpl(PessoaRepository pessoaRepository) {
+	    this.pessoaRepository =pessoaRepository;
+	    }
+	
+	
+	
 	private PessoaInstituicaoRepository pessoaInstituicaoRepository;
+	public UsuarioServiceImpl(PessoaInstituicaoRepository pessoaInstituicaoRepository) {
+	    this.pessoaInstituicaoRepository =pessoaInstituicaoRepository;
+	    }
 	
 	@Override
 	protected JpaRepository<Usuario, Long> getRepository() {

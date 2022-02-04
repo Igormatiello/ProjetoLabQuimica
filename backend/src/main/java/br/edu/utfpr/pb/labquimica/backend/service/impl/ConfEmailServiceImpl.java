@@ -2,6 +2,7 @@ package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
 import br.edu.utfpr.pb.labquimica.backend.model.ConfEmail;
 import br.edu.utfpr.pb.labquimica.backend.repository.ConfEmailRepository;
+import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.ConfEmailService;
 import br.edu.utfpr.pb.labquimica.backend.service.EmailService;
 import br.edu.utfpr.pb.labquimica.backend.utils.Email;
@@ -14,10 +15,23 @@ import java.util.List;
 @Service
 public class ConfEmailServiceImpl extends CrudServiceImpl<ConfEmail, Integer> implements ConfEmailService {
 
-    @Autowired
+    
     private ConfEmailRepository confEmailRepository;
-    @Autowired
+    
+    public ConfEmailServiceImpl(ConfEmailRepository confEmailRepository) {
+        this.confEmailRepository = confEmailRepository;
+        }
+    
+
     private EmailService emailService;
+    
+    
+    public ConfEmailServiceImpl (EmailService emailService) {
+    	this.emailService=emailService;
+    	
+    }
+    
+    
 
     @Override
     protected JpaRepository<ConfEmail, Integer> getRepository() {

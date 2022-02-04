@@ -2,6 +2,7 @@ package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
 import br.edu.utfpr.pb.labquimica.backend.model.Cidade;
 import br.edu.utfpr.pb.labquimica.backend.repository.CidadeRepository;
+import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,8 +13,14 @@ import java.util.List;
 @Service
 public class CidadeServiceImpl extends CrudServiceImpl<Cidade,Integer> implements CidadeService {
 
-    @Autowired
+ 
     private CidadeRepository cidadeRepository;
+    
+    public CidadeServiceImpl(CidadeRepository cidadeRepository) {
+        this.cidadeRepository = cidadeRepository;
+        }
+    
+    
     @Override
     protected JpaRepository<Cidade, Integer> getRepository() {
         return cidadeRepository;

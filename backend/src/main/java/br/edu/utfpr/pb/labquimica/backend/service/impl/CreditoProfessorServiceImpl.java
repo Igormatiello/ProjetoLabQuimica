@@ -2,6 +2,7 @@ package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
 import br.edu.utfpr.pb.labquimica.backend.model.CreditoProfessor;
 import br.edu.utfpr.pb.labquimica.backend.repository.CreditoProfessorRepository;
+import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.CreditoProfessorService;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,22 @@ import java.time.LocalDate;
 @Service
 public class CreditoProfessorServiceImpl extends CrudServiceImpl<CreditoProfessor,Long> implements CreditoProfessorService {
 
-    @Autowired
+    
     private CreditoProfessorRepository creditoProfessorRepository;
 
-    @Autowired
+    public CreditoProfessorServiceImpl(CreditoProfessorRepository creditoProfessorRepository) {
+        this.creditoProfessorRepository = creditoProfessorRepository;
+        }
+    
+    
+   
     private CreditoProfessorService creditoProfessorService;
+    
+    public CreditoProfessorServiceImpl(CreditoProfessorService creditoProfessorService) {
+        this.creditoProfessorService = creditoProfessorService;
+        }
+    
+    
 
     @Override
     public ResultadoOperacaoViewModel<CreditoProfessor> saveWithValidation(CreditoProfessor entity) {

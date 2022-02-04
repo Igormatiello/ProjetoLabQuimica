@@ -11,6 +11,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.ActiveProfiles;
@@ -42,23 +43,42 @@ public class ParticipacaoProgramaEnsinoServiceTests {
 	@MockBean
 	ParticipacaoProgramaEnsinoRepository repository;
 	
-	ParticipacaoProgramaEnsinoRepositoryTests PpeTest;
 	
+	
+	
+	@Autowired
 	ProgramaEnsinoRepository PeRep;
 	
 	ProgramaEnsinoRepositoryTests PeTest;
 	
+	
+	@Autowired
 	PessoaInstituicaoRepository PiRep;
+	
+	
 	
 	PessoalInstituicaoRepositoryTests PiTest;
 	
-	
+	public static ParticipacaoProgramaEnsino criarParticipacaoProgramaEnsino() {
+		
+		
+		
+		return ParticipacaoProgramaEnsino
+				.builder()
+				.programaEnsino(null)
+				.participante(null)
+				.orientador(null)
+				.dataTermino(null)
+				.ehAtivo(false)
+				.build();
+								
+	}
 	
 	@Test
 	public void deveRetornarProgramaEnsinoAtivoPelosIds() {
 		
 		
-		ParticipacaoProgramaEnsino ppe= PpeTest.criarParticipacaoProgramaEnsino();
+		ParticipacaoProgramaEnsino ppe= criarParticipacaoProgramaEnsino();
 		
 		ppe.setEhAtivo(true);
 		ppe.setId(1l);
@@ -105,7 +125,7 @@ public class ParticipacaoProgramaEnsinoServiceTests {
 		List<ParticipacaoProgramaEnsino> listaPPE=new ArrayList<>();
 		
 		
-		ParticipacaoProgramaEnsino ppe= PpeTest.criarParticipacaoProgramaEnsino();
+		ParticipacaoProgramaEnsino ppe=criarParticipacaoProgramaEnsino();
 		
 		ppe.setEhAtivo(true);
 		ppe.setId(1l);
@@ -156,7 +176,7 @@ public class ParticipacaoProgramaEnsinoServiceTests {
 		List<ParticipacaoProgramaEnsino> listaPPE=new ArrayList<>();
 		
 		
-		ParticipacaoProgramaEnsino ppe= PpeTest.criarParticipacaoProgramaEnsino();
+		ParticipacaoProgramaEnsino ppe= criarParticipacaoProgramaEnsino();
 		
 		ppe.setEhAtivo(true);
 		ppe.setId(1l);

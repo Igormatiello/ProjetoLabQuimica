@@ -1,6 +1,7 @@
 package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
 import br.edu.utfpr.pb.labquimica.backend.model.PessoaInstituicao;
+import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.PessoaInstituicaoRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.PessoaInstituicaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,14 @@ import java.util.List;
 @Service
 public class PessoaInstituicaoServiceImpl extends CrudServiceImpl<PessoaInstituicao, Long> implements PessoaInstituicaoService {
 
-    @Autowired
+ 
     private PessoaInstituicaoRepository pessoaInstituicaoRepository;
+    
+    
+    public PessoaInstituicaoServiceImpl(PessoaInstituicaoRepository pessoaInstituicaoRepository) {
+        this.pessoaInstituicaoRepository = pessoaInstituicaoRepository;
+        }
+    
     @Override
     protected JpaRepository<PessoaInstituicao, Long> getRepository() {
         return pessoaInstituicaoRepository;

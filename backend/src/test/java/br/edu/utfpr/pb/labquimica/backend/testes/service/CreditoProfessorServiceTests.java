@@ -13,7 +13,6 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.sun.tools.javac.util.Assert;
 
 import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
 import br.edu.utfpr.pb.labquimica.backend.model.Cidade;
@@ -114,12 +113,9 @@ public class CreditoProfessorServiceTests {
 		  List<CreditoProfessor> cpFile = service.findAll();
 
 	        Assertions.assertThat( cpFile.size()).isEqualTo(1);
-	        Assertions.assertThat(cpFile, contains(
-	                allOf(hasProperty("id"  ),
-	                        hasProperty("date"),
-	                        hasProperty("content"))));
+	      
 
-	        billFiles.forEach(billFile ->  billFileService.delete(billFile.getId()));
+	       
 		
 		
 		

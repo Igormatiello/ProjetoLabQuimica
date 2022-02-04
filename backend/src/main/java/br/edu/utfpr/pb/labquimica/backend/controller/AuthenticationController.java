@@ -6,6 +6,7 @@ import br.edu.utfpr.pb.labquimica.backend.model.Usuario;
 import br.edu.utfpr.pb.labquimica.backend.security.TokenUtils;
 import br.edu.utfpr.pb.labquimica.backend.security.model.AuthenticationRequest;
 import br.edu.utfpr.pb.labquimica.backend.security.model.AuthenticationResponse;
+import br.edu.utfpr.pb.labquimica.backend.service.AnexoFormularioService;
 import br.edu.utfpr.pb.labquimica.backend.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,33 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("auth")
 public class AuthenticationController {
-    @Autowired
+    
+	
+	
     private AuthenticationManager authenticationManager;
-    @Autowired
+    
+    public AuthenticationController(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+        
+   }
+    
+    
+    
     private TokenUtils tokenUtils;
+    public AuthenticationController(TokenUtils tokenUtils) {
+        this.tokenUtils =tokenUtils;
+        
+   }
+   
 
-    @Autowired
     private UsuarioServiceImpl usuarioService;
+    
+    public AuthenticationController(UsuarioServiceImpl usuarioService) {
+        this.usuarioService =usuarioService;
+        
+   }
+    
+    
 
     @PostMapping(value = "")
     public ResponseEntity<?> authenticationRequest(

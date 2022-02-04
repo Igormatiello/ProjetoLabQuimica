@@ -15,9 +15,14 @@ import java.util.List;
 @Service
 public class ParticipacaoProgramaEnsinoServiceImpl extends CrudServiceImpl<ParticipacaoProgramaEnsino, Long> implements ParticipacaoProgramaEnsinoService {
 
-    @Autowired
+    
     private ParticipacaoProgramaEnsinoRepository participacaoProgramaEnsinoRepository;
 
+    public  ParticipacaoProgramaEnsinoServiceImpl (ParticipacaoProgramaEnsinoRepository participacaoProgramaEnsinoRepository) {
+        this.participacaoProgramaEnsinoRepository = participacaoProgramaEnsinoRepository;
+        }
+    
+    
     @Override
     protected JpaRepository<ParticipacaoProgramaEnsino, Long> getRepository() {
         return participacaoProgramaEnsinoRepository;

@@ -36,32 +36,45 @@ public class CidadeServiceTests {
 	public void deveObterUmaListaDeCidades() {
 		
 		
-	List<Cidade> listaCidades=new ArrayList<>();
+	List<Cidade> listaCidades1=new ArrayList<>();
 	Cidade cidade1= new Cidade();
 	cidade1.setNome("pato branco");
 	cidade1.setUf("PR");
 	cidade1.setId(1);
+	
+	Cidade cidade11= new Cidade();
+	cidade11.setNome("pato branco");
+	cidade11.setUf("SC");
+	cidade11.setId(11);
+	
+	repository.save(cidade1);
+
+	List<Cidade> listaCidades2=new ArrayList<>();
 	
 	Cidade cidade2= new Cidade();
 	cidade2.setNome("xaxim");
 	cidade2.setUf("SC");
 	cidade2.setId(2);
 	
-	listaCidades.add(cidade1);
-	listaCidades.add(cidade2);
+	repository.save(cidade2);
+	
+	listaCidades1.add(cidade1);
+	listaCidades1.add(cidade11);
+	listaCidades2.add(cidade2);
 		
 	
 			
 			
-			Mockito.when(repository.findByNomeContainingIgnoreCaseOrderByNomeAsc("pato branco")).thenReturn(listaCidades);
+			Mockito.when(service.findByNomeContainingIgnoreCaseOrderByNomeAsc("pato branco")).thenReturn(listaCidades1);
 			
-			Mockito.when(repository.findByNomeContainingIgnoreCaseOrderByNomeAsc("xaxim")).thenReturn(listaCidades);
+			Mockito.when(repository.findByNomeContainingIgnoreCaseOrderByNomeAsc("xaxim")).thenReturn(listaCidades2);
 			
 			
+			List<Cidade> resultado1= service.findByNomeContainingIgnoreCaseOrderByNomeAsc("pato branco");
 			
-			List<Cidade> resultado= service.findByNomeContainingIgnoreCaseOrderByNomeAsc("pato branco");
+			 
 			
-			Assertions.assertThat(resultado).isNotEmpty().hasSize(1).contains(cidade1);
+			Assertions.assertThat(resultado1).isNotEmpty().hasSize(2).contains(cidade1,cidade11);
 			
 			List<Cidade> resultado2= service.findByNomeContainingIgnoreCaseOrderByNomeAsc("xaxim");
 			
@@ -102,9 +115,7 @@ public class CidadeServiceTests {
 	@Test
 	public void deveLancarErroNaUf() {
 		
-		
-
-		
+	
 		
 		//CENARIO
 		
@@ -113,10 +124,19 @@ public class CidadeServiceTests {
 		Cidade cidade= Cidade.builder().id(1).nome(nome).uf(null).build();
 		 
 		
-		 Mockito.doReturn(cidade).when(service).findByNomeContainingIgnoreCaseOrderByNomeAsc(nome);
+		Mockito.doNothing().doThrow(new RuntimeException
+				(ValidationMessages.UfNaoPodeSerVazio))
+		.when(service).findByNomeContainingIgnoreCaseOrderByNomeAsc(nome);
+		
+		 Mockito.doNothing().when(service).findByNomeContainingIgnoreCaseOrderByNomeAsc(nome);
+		 
+		 
 		 
 		 
 		 //VERIFICAR
+		 
+		 
+		 
 		 
 		 Throwable exception = Assertions.catchThrowable ( () -> service.findByNomeContainingIgnoreCaseOrderByNomeAsc(nome));
 			Assertions.assertThat(exception).isInstanceOf(ValidationMessages.class).hasMessage(ValidationMessages.UfNaoPodeSerVazio);

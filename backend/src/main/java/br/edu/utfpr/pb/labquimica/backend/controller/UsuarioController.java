@@ -4,6 +4,7 @@ import br.edu.utfpr.pb.labquimica.backend.model.Usuario;
 import br.edu.utfpr.pb.labquimica.backend.repository.PapelRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
 import br.edu.utfpr.pb.labquimica.backend.service.PapelService;
+import br.edu.utfpr.pb.labquimica.backend.service.SolicitacaoCadastroService;
 import br.edu.utfpr.pb.labquimica.backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -27,9 +28,13 @@ import java.util.stream.IntStream;
 @RequestMapping("usuario")
 public class UsuarioController extends CrudController<Usuario, Long>{
 
-	@Autowired
+	
 	private UsuarioService usuarioService;
 
+	public   UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService =usuarioService;
+   }
+	
 	@Override
 	protected CrudService<Usuario, Long> getService() {
 		return usuarioService;

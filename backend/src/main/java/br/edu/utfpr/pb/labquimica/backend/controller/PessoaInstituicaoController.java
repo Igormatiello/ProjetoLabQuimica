@@ -7,6 +7,7 @@ import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
 import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
 import br.edu.utfpr.pb.labquimica.backend.service.ParticipacaoProgramaEnsinoService;
 import br.edu.utfpr.pb.labquimica.backend.service.PessoaInstituicaoService;
+import br.edu.utfpr.pb.labquimica.backend.service.PessoaService;
 import br.edu.utfpr.pb.labquimica.backend.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,12 +21,26 @@ import java.util.List;
 @RequestMapping("pessoa-instituicao")
 public class PessoaInstituicaoController extends CrudController<PessoaInstituicao, Long> {
 
-    @Autowired
+    
     private PessoaInstituicaoService pessoaInstituicaoService;
-    @Autowired
+    
+    public  PessoaInstituicaoController (PessoaInstituicaoService pessoaInstituicaoService) {
+        this.pessoaInstituicaoService =pessoaInstituicaoService;
+   }
+    
+   
     private UserAccessor usuarioAccessor;
-    @Autowired
+    
+    public  PessoaInstituicaoController (UserAccessor usuarioAccessor) {
+        this.usuarioAccessor =usuarioAccessor;
+   }
+    
+   
     private ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService;
+    
+    public  PessoaInstituicaoController (ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService) {
+        this.participacaoProgramaEnsinoService =participacaoProgramaEnsinoService;
+   }
 
     @Override
     protected CrudService<PessoaInstituicao, Long> getService() {

@@ -7,6 +7,7 @@ import br.edu.utfpr.pb.labquimica.backend.model.Instituicao;
 import br.edu.utfpr.pb.labquimica.backend.model.PessoaInstituicao;
 import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
 import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
+import br.edu.utfpr.pb.labquimica.backend.service.EquipamentoService;
 import br.edu.utfpr.pb.labquimica.backend.service.FormularioService;
 import br.edu.utfpr.pb.labquimica.backend.service.InstituicaoService;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.FormularioAnaliseViewModel;
@@ -33,11 +34,20 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("formulario")
 public class FormularioController extends CrudController<Formulario, Long> {
 
-    @Autowired
+   
     private FormularioService formularioService;
-    @Autowired
+    
+    
+    public FormularioController(FormularioService formularioService) {
+        this.formularioService =formularioService;
+   }
+    
     private UserAccessor usuarioAccessor;
 
+    public FormularioController( UserAccessor usuarioAccessor) {
+        this.usuarioAccessor =usuarioAccessor;
+   }
+    
     @Override
     protected CrudService<Formulario, Long> getService() {
         return formularioService;

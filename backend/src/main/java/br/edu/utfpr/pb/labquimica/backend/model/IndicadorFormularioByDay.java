@@ -1,5 +1,6 @@
 package br.edu.utfpr.pb.labquimica.backend.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
+@AllArgsConstructor
 
-@NoArgsConstructor
 public class IndicadorFormularioByDay {
 
     private Long qtde;

@@ -6,6 +6,7 @@ import br.edu.utfpr.pb.labquimica.backend.repository.PessoaRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.UsuarioRepository;
 import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
 import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
+import br.edu.utfpr.pb.labquimica.backend.service.ParticipacaoProgramaEnsinoService;
 import br.edu.utfpr.pb.labquimica.backend.service.PessoaService;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.SolicitacaoCadastroViewModel;
@@ -20,15 +21,25 @@ import java.util.List;
 @RequestMapping("pessoa")
 public class PessoaController extends CrudController<Pessoa, Long> {
 
-    @Autowired
+    
     private PessoaService pessoaService;
 
-    @Autowired
+    public  PessoaController (PessoaService pessoaService) {
+        this.pessoaService =pessoaService;
+   }
+    
     private PessoaRepository pessoaRepository;
 
-    @Autowired
+    public  PessoaController (PessoaRepository pessoaRepository) {
+        this.pessoaRepository =pessoaRepository;
+   }
+    
     private UserAccessor usuarioAccessor;
 
+    public  PessoaController (UserAccessor usuarioAccessor) {
+        this.usuarioAccessor =usuarioAccessor;
+   }
+    
     @Override
     protected CrudService<Pessoa, Long> getService() {
         return pessoaService;
