@@ -25,95 +25,74 @@ import br.edu.utfpr.pb.labquimica.backend.repository.ParticipacaoProgramaEnsinoR
 @DataJpaTest
 @AutoConfigureTestDatabase
 
-
 public class ParticipacaoProgramaEnsinoRepositoryTests {
 
 	@Autowired
 	ParticipacaoProgramaEnsinoRepository repository;
-	
+
 	@Autowired
 	TestEntityManager entityManager;
-	
-@Test
-	
+
+	@Test
+
 	public void deveSalvarUmaPaticipacaoProgramaEnsinoNaBaseDeDados() {
 
-		ParticipacaoProgramaEnsino participacaoProgramaEnsino= criarEPersistirParticipacaoProgramaEnsino();
-					
-		
+		ParticipacaoProgramaEnsino participacaoProgramaEnsino = criarEPersistirParticipacaoProgramaEnsino();
+
 		ParticipacaoProgramaEnsino ppeSalvo = repository.save(participacaoProgramaEnsino);
-	
-		
+
 		Assertions.assertThat(ppeSalvo.getId()).isNotNull();
 	}
 
-@Test
-public void deveDeletarUmaParticipacaoProgramaEnsino() {
-	ParticipacaoProgramaEnsino participacaoProgramaEnsino = criarEPersistirParticipacaoProgramaEnsino();
-	
-	participacaoProgramaEnsino = entityManager.find(ParticipacaoProgramaEnsino.class, participacaoProgramaEnsino.getId());
-	
-	repository.delete(participacaoProgramaEnsino);
-	
-	
-	
-	ParticipacaoProgramaEnsino participacaoProgramaEnsinoInexistente = entityManager.find(ParticipacaoProgramaEnsino.class, participacaoProgramaEnsino.getId());
-	assertThat(participacaoProgramaEnsinoInexistente).isNull();
-}
-	
-@Test
-public void deveAtualizarUmaParticipacaoProgramaEnsino() {
-	ParticipacaoProgramaEnsino participacaoProgramaEnsino = criarEPersistirParticipacaoProgramaEnsino();
-	
+	@Test
+	public void deveDeletarUmaParticipacaoProgramaEnsino() {
+		ParticipacaoProgramaEnsino participacaoProgramaEnsino = criarEPersistirParticipacaoProgramaEnsino();
 
-	
-	repository.save(participacaoProgramaEnsino);
-	
-	ParticipacaoProgramaEnsino pgeAtualizado = entityManager.find(ParticipacaoProgramaEnsino.class, participacaoProgramaEnsino.getId());
-	
-	//ASSERTIONS
-	
-	
-}
+		participacaoProgramaEnsino = entityManager.find(ParticipacaoProgramaEnsino.class,
+				participacaoProgramaEnsino.getId());
 
+		repository.delete(participacaoProgramaEnsino);
 
-@Test
-public void deveBuscarUmaParticipacaoProgramaEnsinoInstituicaoPorId() {
-	
-	
-	ParticipacaoProgramaEnsino participacaoProgramaEnsino = criarEPersistirParticipacaoProgramaEnsino();
-	java.util.Optional<ParticipacaoProgramaEnsino> pIEncontrado= repository.findById(participacaoProgramaEnsino.getId());
-			
-	assertThat(pIEncontrado.isPresent()).isTrue();
+		ParticipacaoProgramaEnsino participacaoProgramaEnsinoInexistente = entityManager
+				.find(ParticipacaoProgramaEnsino.class, participacaoProgramaEnsino.getId());
+		assertThat(participacaoProgramaEnsinoInexistente).isNull();
+	}
 
-}
-	
-	
+	@Test
+	public void deveAtualizarUmaParticipacaoProgramaEnsino() {
+		ParticipacaoProgramaEnsino participacaoProgramaEnsino = criarEPersistirParticipacaoProgramaEnsino();
 
-	
-	
+		repository.save(participacaoProgramaEnsino);
+
+		ParticipacaoProgramaEnsino pgeAtualizado = entityManager.find(ParticipacaoProgramaEnsino.class,
+				participacaoProgramaEnsino.getId());
+
+		// ASSERTIONS
+
+	}
+
+	@Test
+	public void deveBuscarUmaParticipacaoProgramaEnsinoInstituicaoPorId() {
+
+		ParticipacaoProgramaEnsino participacaoProgramaEnsino = criarEPersistirParticipacaoProgramaEnsino();
+		java.util.Optional<ParticipacaoProgramaEnsino> pIEncontrado = repository
+				.findById(participacaoProgramaEnsino.getId());
+
+		assertThat(pIEncontrado.isPresent()).isTrue();
+
+	}
+
 	private ParticipacaoProgramaEnsino criarEPersistirParticipacaoProgramaEnsino() {
 		ParticipacaoProgramaEnsino participacaoProgramaEnsino = criarParticipacaoProgramaEnsino();
 		entityManager.persist(participacaoProgramaEnsino);
 		return participacaoProgramaEnsino;
 	}
-		
-		public static ParticipacaoProgramaEnsino criarParticipacaoProgramaEnsino() {
-			
-	
-			
-			return ParticipacaoProgramaEnsino
-					.builder()
-					.programaEnsino(null)
-					.participante(null)
-					.orientador(null)
-					.dataTermino(null)
-					.ehAtivo(false)
-					.build();
-									
-		}
-	
-	
-	
-	
+
+	public static ParticipacaoProgramaEnsino criarParticipacaoProgramaEnsino() {
+
+		return ParticipacaoProgramaEnsino.builder().programaEnsino(null).participante(null).orientador(null)
+				.dataTermino(null).ehAtivo(false).build();
+
+	}
+
 }

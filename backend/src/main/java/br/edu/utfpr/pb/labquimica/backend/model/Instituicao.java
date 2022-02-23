@@ -19,30 +19,25 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Table(name = "instituicao")
 @EqualsAndHashCode(of = "id")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Instituicao implements Serializable {
-    private static final long serialVersionUID = -8727132008984758268L;
+	private static final long serialVersionUID = -8727132008984758268L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @NotBlank(message = ValidationMessages.NomeNaoPodeSerVazio)
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    private String nome;
+	@NotBlank(message = ValidationMessages.NomeNaoPodeSerVazio)
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	private String nome;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @NotNull(message = ValidationMessages.TipoInsituicaoNaoPodeSerVazio)
-    private TipoInstituicao tipoInstituicao;
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = ValidationMessages.TipoInsituicaoNaoPodeSerVazio)
+	private TipoInstituicao tipoInstituicao;
 
-    @ManyToOne()
-    @NotNull(message = ValidationMessages.CidadeNaoPodeSerVazio)
-    @JoinColumn(name = "cidade_id", referencedColumnName = "id")
-    private Cidade cidade;
+	@ManyToOne()
+	@NotNull(message = ValidationMessages.CidadeNaoPodeSerVazio)
+	@JoinColumn(name = "cidade_id", referencedColumnName = "id")
+	private Cidade cidade;
 }
-
-
-
-
-

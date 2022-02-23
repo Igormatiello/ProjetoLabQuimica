@@ -11,13 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class PapelServiceImpl extends CrudServiceImpl<Papel, Long> implements PapelService {
 
-
 	private PapelRepository papelRepository;
-	
+
 	public PapelServiceImpl(PapelRepository papelRepository) {
-	    this.papelRepository = papelRepository;
-	    }
-	
+		this.papelRepository = papelRepository;
+	}
+
 	@Override
 	protected JpaRepository<Papel, Long> getRepository() {
 		return papelRepository;

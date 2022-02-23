@@ -15,19 +15,19 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = { "id" })
 public class Papel implements GrantedAuthority {
-    private static final long serialVersionUID = 6558374534922809265L;
+	private static final long serialVersionUID = 6558374534922809265L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(length = DefaultFields.DESCRICAO_CURTA, nullable = false)
-    private String nome;
+	@Column(length = DefaultFields.DESCRICAO_CURTA, nullable = false)
+	private String nome;
 
-    @Override
-    public String getAuthority() {
-        return this.getNome();
-    }
+	@Override
+	public String getAuthority() {
+		return this.getNome();
+	}
 }

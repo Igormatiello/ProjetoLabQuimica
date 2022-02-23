@@ -13,14 +13,12 @@ import java.util.List;
 @Service
 public class ServicoServiceImpl extends CrudServiceImpl<Servico, Integer> implements ServicoService {
 
-	
 	private ServicoRepository servicoRepository;
-	
+
 	public ServicoServiceImpl(ServicoRepository servicoRepository) {
-	    this.servicoRepository = servicoRepository;
-	    }
-	
-	
+		this.servicoRepository = servicoRepository;
+	}
+
 	@Override
 	protected JpaRepository<Servico, Integer> getRepository() {
 		return servicoRepository;

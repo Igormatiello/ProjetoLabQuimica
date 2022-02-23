@@ -12,17 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("equipamento")
 public class EquipamentoController extends CrudController<Equipamento, Integer> {
 
-  
-    private EquipamentoService equipamentoService;
+	private EquipamentoService equipamentoService;
 
-    public EquipamentoController(EquipamentoService equipamentoService) {
-        this.equipamentoService =equipamentoService;
-        
-   }
-    
-    
-    @Override
-    protected CrudService<Equipamento, Integer> getService() {
-        return equipamentoService;
-    }
+	public EquipamentoController(EquipamentoService equipamentoService) {
+		this.equipamentoService = equipamentoService;
+
+	}
+
+	@Override
+	protected CrudService<Equipamento, Integer> getService() {
+		return equipamentoService;
+	}
 }

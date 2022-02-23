@@ -12,16 +12,16 @@ import java.time.LocalDate;
 
 public class IndicadorFormularioByDay {
 
-    private Long qtde;
-    private LocalDate dataSolicitacao;
+	private Long qtde;
+	private LocalDate dataSolicitacao;
 
-    // criei porque por algum motivo estava indo uma formato estranho o localDate,
-    // dessa forma eu dou um toString antes de mandar pro front
-    private String dataSolic;
+	// criei porque por algum motivo estava indo uma formato estranho o localDate,
+	// dessa forma eu dou um toString antes de mandar pro front
+	private String dataSolic;
 
-    public IndicadorFormularioByDay(Long qtde, LocalDate dataSolicitacao) {
-        this.qtde = qtde;
-        this.dataSolicitacao = dataSolicitacao;
-    }
+	public IndicadorFormularioByDay(Long qtde, LocalDate dataSolicitacao) {
+		this.qtde = qtde;
+		this.dataSolicitacao = dataSolicitacao;
+	}
 
 }

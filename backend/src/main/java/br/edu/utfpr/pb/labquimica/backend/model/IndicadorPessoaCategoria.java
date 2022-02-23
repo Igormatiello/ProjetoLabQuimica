@@ -9,6 +9,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class IndicadorPessoaCategoria {
 
-    private String categoria;
-    private Integer qtdePessoaCadastrada;
+	private String categoria;
+	private Integer qtdePessoaCadastrada;
 }

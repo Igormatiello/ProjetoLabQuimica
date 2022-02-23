@@ -15,40 +15,33 @@ import java.util.List;
 @Service
 public class ConfEmailServiceImpl extends CrudServiceImpl<ConfEmail, Integer> implements ConfEmailService {
 
-    
-    private ConfEmailRepository confEmailRepository;
-    
-    public ConfEmailServiceImpl(ConfEmailRepository confEmailRepository) {
-        this.confEmailRepository = confEmailRepository;
-        }
-    
+	private ConfEmailRepository confEmailRepository;
 
-    private EmailService emailService;
-    
-    
-    public ConfEmailServiceImpl (EmailService emailService) {
-    	this.emailService=emailService;
-    	
-    }
-    
-    
+	public ConfEmailServiceImpl(ConfEmailRepository confEmailRepository) {
+		this.confEmailRepository = confEmailRepository;
+	}
 
-    @Override
-    protected JpaRepository<ConfEmail, Integer> getRepository() {
-        return confEmailRepository;
-    }
+	private EmailService emailService;
 
-    @Override
-    public ConfEmail findConfig() {
-        List<ConfEmail> config = confEmailRepository.findAll();
-        return config != null && config.size() > 0 ? config.get(0) : null;
-    }
+	public ConfEmailServiceImpl(EmailService emailService) {
+		this.emailService = emailService;
 
-    @Override
-    public void sendEmailTeste() {
-        Email emailTeste = new Email()
-                .setTitulo("Teste")
-                .setConteudo("Teste de envio de email");
-        emailService.enviarToEmailPadraoSemThread(emailTeste);
-    }
+	}
+
+	@Override
+	protected JpaRepository<ConfEmail, Integer> getRepository() {
+		return confEmailRepository;
+	}
+
+	@Override
+	public ConfEmail findConfig() {
+		List<ConfEmail> config = confEmailRepository.findAll();
+		return config != null && config.size() > 0 ? config.get(0) : null;
+	}
+
+	@Override
+	public void sendEmailTeste() {
+		Email emailTeste = new Email().setTitulo("Teste").setConteudo("Teste de envio de email");
+		emailService.enviarToEmailPadraoSemThread(emailTeste);
+	}
 }

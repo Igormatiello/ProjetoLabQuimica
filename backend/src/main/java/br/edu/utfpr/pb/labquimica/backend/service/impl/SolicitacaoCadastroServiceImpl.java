@@ -23,82 +23,76 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class SolicitacaoCadastroServiceImpl extends CrudServiceImpl<SolicitacaoCadastro, Long> implements SolicitacaoCadastroService {
+public class SolicitacaoCadastroServiceImpl extends CrudServiceImpl<SolicitacaoCadastro, Long>
+		implements SolicitacaoCadastroService {
 
- 
-    private SolicitacaoCadastroRepository solicitacaoCadastroRepository;
+	private SolicitacaoCadastroRepository solicitacaoCadastroRepository;
 
-    public SolicitacaoCadastroServiceImpl(SolicitacaoCadastroRepository solicitacaoCadastroRepository) {
-	    this.solicitacaoCadastroRepository = solicitacaoCadastroRepository;
-	    }
-    
-    
-    private PessoaServiceImpl pessoaService;
+	public SolicitacaoCadastroServiceImpl(SolicitacaoCadastroRepository solicitacaoCadastroRepository) {
+		this.solicitacaoCadastroRepository = solicitacaoCadastroRepository;
+	}
 
-    public SolicitacaoCadastroServiceImpl(PessoaServiceImpl pessoaService) {
-	    this.pessoaService =pessoaService;
-	    }
-    
-    
-    
-    private EmailService emailService;
-    
-    public SolicitacaoCadastroServiceImpl(EmailService emailService) {
-	    this.emailService =emailService;
-	    }
-    
-    
+	private PessoaServiceImpl pessoaService;
 
-    @Override
-    protected JpaRepository<SolicitacaoCadastro, Long> getRepository() {
-        return solicitacaoCadastroRepository;
-    }
+	public SolicitacaoCadastroServiceImpl(PessoaServiceImpl pessoaService) {
+		this.pessoaService = pessoaService;
+	}
 
-    @Transactional(propagation = Propagation.NESTED)
-    public ResultadoOperacaoViewModel<SolicitacaoCadastro> saveWithValidation(SolicitacaoCadastro entity) {
-        var validate = new ValidaCpfCnpj();
-        var result = new ResultadoOperacaoViewModel<SolicitacaoCadastro>();
+	private EmailService emailService;
 
-        if (entity.getTipoPessoa() == TipoPessoa.Fisica) {
-            if (!validate.isCPF(entity.getDocumento())) {
-                return result.returningFailMessage(ValidationMessages.FormatoCpfInvalido);
-            }
-        } else {
-            if (!validate.isCNPJ(entity.getDocumento())) {
-                return result.returningFailMessage(ValidationMessages.FormatoCnpjInvalido);
-            }
-        }
+	public SolicitacaoCadastroServiceImpl(EmailService emailService) {
+		this.emailService = emailService;
+	}
 
-        var checkCadastrado = pessoaService.findCpfCnpjCadastrado(entity.getTipoPessoa(), entity.getDocumento());
-        if (checkCadastrado.isSucesso()) {
-            return result.returningFailMessage(ValidationMessages.PessoaJaExiste);
-        }
+	@Override
+	protected JpaRepository<SolicitacaoCadastro, Long> getRepository() {
+		return solicitacaoCadastroRepository;
+	}
 
-        if (entity.getTipoPessoa() == TipoPessoa.Fisica && !entity.isEhProfessor()) {
-            if (!pessoaService.findCpfCnpjCadastrado(TipoPessoa.Fisica, entity.getCpfOrientador()).isSucesso()) {
-                return result.returningFailMessage(ValidationMessages.ProfessorNaoCadastrado);
-            }
-        }
-        super.save(entity);
+	@Transactional(propagation = Propagation.NESTED)
+	public ResultadoOperacaoViewModel<SolicitacaoCadastro> saveWithValidation(SolicitacaoCadastro entity) {
+		var validate = new ValidaCpfCnpj();
+		var result = new ResultadoOperacaoViewModel<SolicitacaoCadastro>();
 
-        return result.returningSuccess(entity);
-    }
+		if (entity.getTipoPessoa() == TipoPessoa.Fisica) {
+			if (!validate.isCPF(entity.getDocumento())) {
+				return result.returningFailMessage(ValidationMessages.FormatoCpfInvalido);
+			}
+		} else {
+			if (!validate.isCNPJ(entity.getDocumento())) {
+				return result.returningFailMessage(ValidationMessages.FormatoCnpjInvalido);
+			}
+		}
 
-    @Override
-    public List<SolicitacaoCadastro> findSolicitacoesAbertas() {
-        return solicitacaoCadastroRepository.findSolicitacoesAbertas();
-    }
+		var checkCadastrado = pessoaService.findCpfCnpjCadastrado(entity.getTipoPessoa(), entity.getDocumento());
+		if (checkCadastrado.isSucesso()) {
+			return result.returningFailMessage(ValidationMessages.PessoaJaExiste);
+		}
 
-    @Override
-    public void sendEmailToResponsavelLiberacao() {
-        Email email = new Email()
-                .setTitulo("Nova Solicitação de Cadastro")
-                .setConteudo("Foi realizado uma nova solicitação de cadastro. Para visualizar, basta acessar o menu Cadastros -> Solicitações de Cadastro.");
-        emailService.enviarToEmailPadrao(email);
-    }
+		if (entity.getTipoPessoa() == TipoPessoa.Fisica && !entity.isEhProfessor()) {
+			if (!pessoaService.findCpfCnpjCadastrado(TipoPessoa.Fisica, entity.getCpfOrientador()).isSucesso()) {
+				return result.returningFailMessage(ValidationMessages.ProfessorNaoCadastrado);
+			}
+		}
+		super.save(entity);
 
-    @Override
-    public List<SolicitacaoCadastro> findAllByDataCriacaoBetween(LocalDate dtIni, LocalDate dtFim) {
-        return solicitacaoCadastroRepository.findAllByDataCriacaoBetween(dtIni, dtFim);
-    }
+		return result.returningSuccess(entity);
+	}
+
+	@Override
+	public List<SolicitacaoCadastro> findSolicitacoesAbertas() {
+		return solicitacaoCadastroRepository.findSolicitacoesAbertas();
+	}
+
+	@Override
+	public void sendEmailToResponsavelLiberacao() {
+		Email email = new Email().setTitulo("Nova Solicitação de Cadastro").setConteudo(
+				"Foi realizado uma nova solicitação de cadastro. Para visualizar, basta acessar o menu Cadastros -> Solicitações de Cadastro.");
+		emailService.enviarToEmailPadrao(email);
+	}
+
+	@Override
+	public List<SolicitacaoCadastro> findAllByDataCriacaoBetween(LocalDate dtIni, LocalDate dtFim) {
+		return solicitacaoCadastroRepository.findAllByDataCriacaoBetween(dtIni, dtFim);
+	}
 }

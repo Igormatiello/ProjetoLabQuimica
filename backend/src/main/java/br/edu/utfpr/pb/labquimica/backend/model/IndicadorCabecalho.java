@@ -9,7 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class IndicadorCabecalho {
 
-    private Integer qtdeFormularioEmEspera;
-    private Integer qtdeFormularioEmAnalise;
-    private Integer qtdeFormularioEncerrado;
+	private Integer qtdeFormularioEmEspera;
+	private Integer qtdeFormularioEmAnalise;
+	private Integer qtdeFormularioEncerrado;
 }

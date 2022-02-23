@@ -23,34 +23,34 @@ import java.time.LocalDate;
 @Table(name = "credito_professor")
 @EqualsAndHashCode(of = "id")
 public class CreditoProfessor implements Serializable {
-    private static final long serialVersionUID = -8727132008984758972L;
+	private static final long serialVersionUID = -8727132008984758972L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne()
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-    @NotNull(message = ValidationMessages.PessoaNaoPodeSerVazio)
-    private Pessoa pessoa;
+	@ManyToOne()
+	@JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+	@NotNull(message = ValidationMessages.PessoaNaoPodeSerVazio)
+	private Pessoa pessoa;
 
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    @NotBlank(message = ValidationMessages.DescricaoNaoPodeSerVazio)
-    private String nomeProjeto;
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	@NotBlank(message = ValidationMessages.DescricaoNaoPodeSerVazio)
+	private String nomeProjeto;
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate dataInclusao;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate dataInclusao;
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate dataAtualizacao;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate dataAtualizacao;
 
-    @Column(nullable = false)
-    @NotNull(message = "Valor do crédito não pode ser vazio")
-    private Double valorSaldo = 0.0;
+	@Column(nullable = false)
+	@NotNull(message = "Valor do crédito não pode ser vazio")
+	private Double valorSaldo = 0.0;
 
-    @Column(nullable = false)
-    @NotNull(message = "Valor do crédito não pode ser vazio")
-    private Double valorCredito = 0.0;
+	@Column(nullable = false)
+	@NotNull(message = "Valor do crédito não pode ser vazio")
+	private Double valorCredito = 0.0;
 }

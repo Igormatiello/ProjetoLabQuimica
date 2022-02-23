@@ -16,22 +16,20 @@ import java.util.List;
 @RequestMapping("participacao-programa-ensino")
 public class ParticipacaoProgramaEnsinoController extends CrudController<ParticipacaoProgramaEnsino, Long> {
 
-    
-    private ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService;
+	private ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService;
 
-    public ParticipacaoProgramaEnsinoController(ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService) {
-        this.participacaoProgramaEnsinoService =participacaoProgramaEnsinoService;
-   }
-    
-    @Override
-    protected CrudService<ParticipacaoProgramaEnsino, Long> getService() {
-        return participacaoProgramaEnsinoService;
-    }
+	public ParticipacaoProgramaEnsinoController(ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService) {
+		this.participacaoProgramaEnsinoService = participacaoProgramaEnsinoService;
+	}
 
-    @GetMapping("pessoa-instituicao/{pessoaInstituicaoId}")
-    public List<ParticipacaoProgramaEnsino> findParticipacaoPrograma(@PathVariable Long pessoaInstituicaoId){
-        return participacaoProgramaEnsinoService.findParticipacaoPrograma(pessoaInstituicaoId);
-    }
+	@Override
+	protected CrudService<ParticipacaoProgramaEnsino, Long> getService() {
+		return participacaoProgramaEnsinoService;
+	}
 
+	@GetMapping("pessoa-instituicao/{pessoaInstituicaoId}")
+	public List<ParticipacaoProgramaEnsino> findParticipacaoPrograma(@PathVariable Long pessoaInstituicaoId) {
+		return participacaoProgramaEnsinoService.findParticipacaoPrograma(pessoaInstituicaoId);
+	}
 
 }

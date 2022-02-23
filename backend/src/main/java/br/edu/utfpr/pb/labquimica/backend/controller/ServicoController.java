@@ -1,4 +1,5 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
+
 import br.edu.utfpr.pb.labquimica.backend.model.Cidade;
 import br.edu.utfpr.pb.labquimica.backend.model.Servico;
 import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
@@ -14,20 +15,19 @@ import java.util.Optional;
 @RequestMapping("servico")
 public class ServicoController extends CrudController<Servico, Integer> {
 
-   
-    private ServicoService servicoService;
+	private ServicoService servicoService;
 
-    public   ServicoController(ServicoService servicoService) {
-        this.servicoService =servicoService;
-   }
-    
-    @Override
-    protected CrudService<Servico, Integer> getService() {
-        return servicoService;
-    }
+	public ServicoController(ServicoService servicoService) {
+		this.servicoService = servicoService;
+	}
 
-    @GetMapping("equipamento")
-    public List<Servico> findAllByEquipamentoIdOrderByDescricao(@RequestParam("equipamento") Integer equipamentoId) {
-        return servicoService.findAllByEquipamentoIdOrderByDescricao(equipamentoId);
-    }
+	@Override
+	protected CrudService<Servico, Integer> getService() {
+		return servicoService;
+	}
+
+	@GetMapping("equipamento")
+	public List<Servico> findAllByEquipamentoIdOrderByDescricao(@RequestParam("equipamento") Integer equipamentoId) {
+		return servicoService.findAllByEquipamentoIdOrderByDescricao(equipamentoId);
+	}
 }

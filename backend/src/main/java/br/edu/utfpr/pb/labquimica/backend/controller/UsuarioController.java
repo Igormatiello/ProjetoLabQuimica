@@ -26,15 +26,14 @@ import java.util.stream.IntStream;
 
 @RestController
 @RequestMapping("usuario")
-public class UsuarioController extends CrudController<Usuario, Long>{
+public class UsuarioController extends CrudController<Usuario, Long> {
 
-	
 	private UsuarioService usuarioService;
 
-	public   UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService =usuarioService;
-   }
-	
+	public UsuarioController(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
+	}
+
 	@Override
 	protected CrudService<Usuario, Long> getService() {
 		return usuarioService;

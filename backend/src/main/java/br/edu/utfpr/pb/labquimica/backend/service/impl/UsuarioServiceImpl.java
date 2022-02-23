@@ -8,37 +8,40 @@ import br.edu.utfpr.pb.labquimica.backend.repository.PessoaRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.UsuarioRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.UsuarioService;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.DadosPessoaViewModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.bytebuddy.implementation.bind.annotation.Super;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+//import org.springframework.beans.BeanInstantiationException;
+//import  java.lang.NoSuchMethodException;
 @Service
 public class UsuarioServiceImpl extends CrudServiceImpl<Usuario, Long> implements UsuarioService {
 
-	
 	private UsuarioRepository userRepository;
-	
-	
-	public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
-	    this.userRepository = usuarioRepository;
-	    }
 
-	
+	UsuarioServiceImpl() {
+
+	}
+
+	public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+		this.userRepository = usuarioRepository;
+	}
+
 	private PessoaRepository pessoaRepository;
-	
+
 	public UsuarioServiceImpl(PessoaRepository pessoaRepository) {
-	    this.pessoaRepository =pessoaRepository;
-	    }
-	
-	
-	
+		this.pessoaRepository = pessoaRepository;
+	}
+
 	private PessoaInstituicaoRepository pessoaInstituicaoRepository;
+
 	public UsuarioServiceImpl(PessoaInstituicaoRepository pessoaInstituicaoRepository) {
-	    this.pessoaInstituicaoRepository =pessoaInstituicaoRepository;
-	    }
-	
+		this.pessoaInstituicaoRepository = pessoaInstituicaoRepository;
+	}
+
 	@Override
 	protected JpaRepository<Usuario, Long> getRepository() {
 		return userRepository;
@@ -46,16 +49,15 @@ public class UsuarioServiceImpl extends CrudServiceImpl<Usuario, Long> implement
 
 	@Override
 	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-		return userRepository.findByUsername(s).orElseThrow(
-				() -> new UsernameNotFoundException("Usuario não encontrado!")
-		);
+		return userRepository.findByUsername(s)
+				.orElseThrow(() -> new UsernameNotFoundException("Usuario não encontrado!"));
 	}
 
 	@Override
 	public DadosPessoaViewModel carregaDadosUsuario(Long usuarioId) {
 		var dados = new DadosPessoaViewModel();
 		var pessoaInstituicao = pessoaInstituicaoRepository.findPessoaInstituicao(usuarioId);
-		pessoaInstituicao.forEach( p -> p.setPessoa(null));
+		pessoaInstituicao.forEach(p -> p.setPessoa(null));
 		var pessoa = pessoaRepository.findByUsuarioId(usuarioId);
 
 		dados.setPessoaId(pessoa.getId());

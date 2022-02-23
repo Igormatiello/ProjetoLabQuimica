@@ -13,9 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 public class Indicadores {
 
-    private IndicadorCabecalho indicadorCabecalho;
-    private List<IndicadorSolicitacaoCadastro> indicadorSolicitacaoCadastroList;
-    private List<IndicadorPessoaCategoria> indicadorPessoaCategoriaList;
-    private List<SolicitacaoCadastro> solicitacaoCadastrosPendentes;
-    private List<IndicadorFormularioByDay> indicadorFormularioByDayList;
+	private IndicadorCabecalho indicadorCabecalho;
+	private List<IndicadorSolicitacaoCadastro> indicadorSolicitacaoCadastroList;
+	private List<IndicadorPessoaCategoria> indicadorPessoaCategoriaList;
+	private List<SolicitacaoCadastro> solicitacaoCadastrosPendentes;
+	private List<IndicadorFormularioByDay> indicadorFormularioByDayList;
 }

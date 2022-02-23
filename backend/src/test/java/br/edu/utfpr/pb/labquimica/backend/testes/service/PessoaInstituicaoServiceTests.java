@@ -23,6 +23,7 @@ import br.edu.utfpr.pb.labquimica.backend.repository.PessoaInstituicaoRepository
 import br.edu.utfpr.pb.labquimica.backend.repository.PessoaRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.UsuarioRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.impl.PessoaInstituicaoServiceImpl;
+import br.edu.utfpr.pb.labquimica.backend.testes.modelRepository.CriarObjetos;
 import br.edu.utfpr.pb.labquimica.backend.testes.modelRepository.InstituicaoRepositoryTests;
 import br.edu.utfpr.pb.labquimica.backend.testes.modelRepository.PessoaRepositoryTests;
 import br.edu.utfpr.pb.labquimica.backend.testes.modelRepository.PessoalInstituicaoRepositoryTests;
@@ -31,170 +32,161 @@ import br.edu.utfpr.pb.labquimica.backend.testes.modelRepository.UsuarioReposito
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 
-
 public class PessoaInstituicaoServiceTests {
 
 	@SpyBean
 	PessoaInstituicaoServiceImpl service;
-	
+
 	@MockBean
 	PessoaInstituicaoRepository repository;
-	
-	PessoalInstituicaoRepositoryTests PessoaInstituicaoTest;
-	
-	PessoaRepository PessoaRepository;
-	
-	PessoaRepositoryTests PessoaTest;
-	
-	InstituicaoRepositoryTests InstituicaoTest;
-	
-	InstituicaoRepository InstituicaoRepository;
-	
-	UsuarioRepositoryTests UsuarioTest;
-	
-	UsuarioRepository UsuarioRepository;
-	
-	
+
 	@Test
 	public void deveRetornarPessoaInstituicaoPeloNomeECpf() {
-		
-		
-		Pessoa pessoa= PessoaTest.criarPessoa();
-		pessoa.setDocumento("111111111");
-		
-		PessoaRepository.save(pessoa);
-		
-		Instituicao instituicao = InstituicaoTest.criarInstituicao();
-		instituicao.setNome("utfpr");
-		
-		InstituicaoRepository.save(instituicao);
-		
-		PessoaInstituicao pessoaInstituicao= PessoaInstituicaoTest.criarPessoaInstituicao();
+
+		Pessoa pessoa = CriarObjetos.criarPessoa();
+		String doc = pessoa.getDocumento();
+
+		Instituicao instituicao = CriarObjetos.criarInstituicao();
+		String nome = instituicao.getNome();
+
+		PessoaInstituicao pessoaInstituicao = CriarObjetos.criarPessoaInstituicao();
+		Long id = pessoaInstituicao.getId();
 		pessoaInstituicao.setEhAtivo(true);
 		pessoaInstituicao.setInstituicao(instituicao);
 		pessoaInstituicao.setPessoa(pessoa);
-		
+
 		repository.save(pessoaInstituicao);
-		
-		
-		PessoaInstituicao resultado= service.findByInstituicaoNomeAndPessoaDocumentoAndEhProfessorTrue("utfpr", "111111111");
-		
+
+		Mockito.when(service.findByInstituicaoNomeAndPessoaDocumentoAndEhProfessorTrue(nome, doc))
+				.thenReturn(pessoaInstituicao);
+
+		PessoaInstituicao resultado = service.findByInstituicaoNomeAndPessoaDocumentoAndEhProfessorTrue(nome, doc);
+
 		Assertions.assertThat(resultado).isNotNull();
-		
+		Assertions.assertThat(resultado.getId()).isEqualByComparingTo(id);
+
 	}
+
 	@Test
 	public void deveRetornarFalsoPessoaInstituicaoPeloNomeECpf() {
-		
-		
-		Pessoa pessoa= PessoaTest.criarPessoa();
-		pessoa.setDocumento("111111111");
-		
-		//PessoaRepository.save(pessoa);
-		
-		Instituicao instituicao = InstituicaoTest.criarInstituicao();
-		instituicao.setNome("utfpr");
-		
-		//InstituicaoRepository.save(instituicao);
-		
-		PessoaInstituicao pessoaInstituicao= PessoaInstituicaoTest.criarPessoaInstituicao();
-		pessoaInstituicao.setEhAtivo(true);
-		pessoaInstituicao.setInstituicao(instituicao);
-		pessoaInstituicao.setPessoa(pessoa);
-		
-		//repository.save(pessoaInstituicao);
-		
-		
-		PessoaInstituicao resultado= service.findByInstituicaoNomeAndPessoaDocumentoAndEhProfessorTrue("utfpr", "111111111");
-		
+
+		Pessoa pessoa = CriarObjetos.criarPessoa();
+		String doc = pessoa.getDocumento();
+
+		Instituicao instituicao = CriarObjetos.criarInstituicao();
+		String nome = instituicao.getNome();
+
+		PessoaInstituicao pessoaInstituicao = CriarObjetos.criarPessoaInstituicao();
+		Long id = pessoaInstituicao.getId();
+		pessoaInstituicao.setEhAtivo(false);
+		pessoaInstituicao.setInstituicao(null);
+		pessoaInstituicao.setPessoa(null);
+
+		repository.save(pessoaInstituicao);
+
+		Mockito.when(service.findByInstituicaoNomeAndPessoaDocumentoAndEhProfessorTrue(nome, doc))
+				.thenReturn(pessoaInstituicao);
+
+		PessoaInstituicao resultado = service.findByInstituicaoNomeAndPessoaDocumentoAndEhProfessorTrue(nome, doc);
+
 		Assertions.assertThat(resultado).isNull();
-		
+
 	}
-	
+
 	@Test
 	public void deveBuscarPessoaInstituicaoPeloIdDoUsuario() {
-		
-		
-		
-		
-				
-		Usuario usuario= UsuarioTest.criarUsuario();
-		usuario.setId(1l);
-		
 
-		
-		
-		Mockito.when(UsuarioRepository.save(usuario)).thenReturn(usuario);
-		
-		UsuarioRepository.save(usuario);
-		
-		
-		
-		Pessoa pessoa= PessoaTest.criarPessoa();
-		pessoa.setUsuario(usuario);		
-		
-		Mockito.when(PessoaRepository.save(pessoa)).thenReturn(pessoa);
-		
-		PessoaRepository.save(pessoa);
-		
-		
-		
-		Instituicao instituicao = InstituicaoTest.criarInstituicao();
-		
-		Mockito.when(InstituicaoRepository.save(instituicao)).thenReturn(instituicao);
-		
-		InstituicaoRepository.save(instituicao);
-		
-		
-		
-		PessoaInstituicao pessoaInstituicao= PessoaInstituicaoTest.criarPessoaInstituicao();
+		Usuario usuario = CriarObjetos.criarUsuario();
+		Long id = usuario.getId();
+
+		Pessoa pessoa = CriarObjetos.criarPessoa();
+		pessoa.setUsuario(usuario);
+
+		Instituicao instituicao = CriarObjetos.criarInstituicao();
+
+		PessoaInstituicao pessoaInstituicao = CriarObjetos.criarPessoaInstituicao();
 		pessoaInstituicao.setEhAtivo(true);
 		pessoaInstituicao.setInstituicao(instituicao);
 		pessoaInstituicao.setPessoa(pessoa);
-		
+
 		Mockito.when(repository.save(pessoaInstituicao)).thenReturn(pessoaInstituicao);
-		
+
 		repository.save(pessoaInstituicao);
-		
-		
-		
-		
-		  List<PessoaInstituicao> resultado=  service.findPessoaInstituicao(1l);
-		
-		
-		  Assertions.assertThat(resultado).contains(pessoaInstituicao);
-		  
+
+		List<PessoaInstituicao> resultado = service.findPessoaInstituicao(id);
+
+		Assertions.assertThat(resultado).contains(pessoaInstituicao);
+		Assertions.assertThat(resultado).hasSize(1);
+
 	}
+
 	@Test
 	public void deveBuscarPessoaInstituicaoPeloIdPessoa() {
-		
-		//cenario
-		Pessoa pessoa= PessoaTest.criarPessoa();
-		pessoa.setId(1l);
-		
-	List<Pessoa> lista = Arrays.asList(pessoa);
-	
-	
-	
-	Mockito.when(PessoaRepository.findAllById(Mockito.any())).thenReturn(lista);
-	
-	
-	//execução
-	
-	List<PessoaInstituicao> resultado = service.findByPessoaId(1l);
-	
-	//verificações
-	
-	Assertions.assertThat(resultado)
-	.isNotEmpty()
-	.hasSize(1);
-	//.contains(lista);
-	
-	
-	
+
+		Pessoa pessoa = CriarObjetos.criarPessoa();
+		Long idPessoa = pessoa.getId();
+
+		Instituicao instituicao = CriarObjetos.criarInstituicao();
+
+		PessoaInstituicao pessoaInstituicao = CriarObjetos.criarPessoaInstituicao();
+		pessoaInstituicao.setEhAtivo(true);
+		pessoaInstituicao.setInstituicao(instituicao);
+		pessoaInstituicao.setPessoa(pessoa);
+
+		Mockito.when(repository.save(pessoaInstituicao)).thenReturn(pessoaInstituicao);
+
+		repository.save(pessoaInstituicao);
+
+		List<PessoaInstituicao> resultado = service.findByPessoaId(idPessoa);
+
+		Assertions.assertThat(resultado).contains(pessoaInstituicao);
+		Assertions.assertThat(resultado).hasSize(1);
 	}
-	
-	
-	
-	
-	
+
+	@Test
+	public void deveBuscarPessoaInstituicaoPeloIdInstituicao() {
+
+		Pessoa pessoa = CriarObjetos.criarPessoa();
+
+		Instituicao instituicao = CriarObjetos.criarInstituicao();
+		Integer id = instituicao.getId();
+
+		PessoaInstituicao pessoaInstituicao = CriarObjetos.criarPessoaInstituicao();
+		pessoaInstituicao.setEhAtivo(true);
+		pessoaInstituicao.setInstituicao(instituicao);
+		pessoaInstituicao.setPessoa(pessoa);
+
+		Mockito.when(repository.save(pessoaInstituicao)).thenReturn(pessoaInstituicao);
+
+		repository.save(pessoaInstituicao);
+
+		List<PessoaInstituicao> resultado = service.findByInstituicao(id);
+		Assertions.assertThat(resultado).contains(pessoaInstituicao);
+		Assertions.assertThat(resultado).hasSize(1);
+	}
+
+	@Test
+	public void deveRetornarVazioQuandoBuscarPessoaInstituicaoPeloIdPessoa() {
+
+		Pessoa pessoa = CriarObjetos.criarPessoa();
+		Long idPessoa = pessoa.getId();
+		idPessoa = idPessoa - 19;
+
+		Instituicao instituicao = CriarObjetos.criarInstituicao();
+
+		PessoaInstituicao pessoaInstituicao = CriarObjetos.criarPessoaInstituicao();
+		pessoaInstituicao.setEhAtivo(true);
+		pessoaInstituicao.setInstituicao(instituicao);
+		pessoaInstituicao.setPessoa(pessoa);
+
+		Mockito.when(repository.save(pessoaInstituicao)).thenReturn(pessoaInstituicao);
+
+		repository.save(pessoaInstituicao);
+
+		List<PessoaInstituicao> resultado = service.findByPessoaId(idPessoa);
+
+		Assertions.assertThat(resultado).isEmpty();
+
+	}
+
 }

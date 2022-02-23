@@ -17,20 +17,17 @@ import java.io.Serializable;
 @Table(name = "cidade")
 @EqualsAndHashCode(of = "id")
 public class Cidade implements Serializable {
-    private static final long serialVersionUID = -8727132008984758268L;
+	private static final long serialVersionUID = -8727132008984758268L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @NotBlank(message = ValidationMessages.NomeNaoPodeSerVazio)
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    private String nome;
+	@NotBlank(message = ValidationMessages.NomeNaoPodeSerVazio)
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	private String nome;
 
-    @NotBlank(message = ValidationMessages.UfNaoPodeSerVazio)
-    @Column(length = DefaultFields.UF, nullable = false)
-    private String uf;
+	@NotBlank(message = ValidationMessages.UfNaoPodeSerVazio)
+	@Column(length = DefaultFields.UF, nullable = false)
+	private String uf;
 }
-
-
-

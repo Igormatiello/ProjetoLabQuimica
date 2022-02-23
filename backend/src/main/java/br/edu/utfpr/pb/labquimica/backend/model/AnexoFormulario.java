@@ -25,34 +25,32 @@ import java.time.LocalDate;
 @Table
 @EqualsAndHashCode(of = "id")
 public class AnexoFormulario implements Serializable {
-    private static final long serialVersionUID = -3958879063750258062L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	private static final long serialVersionUID = -3958879063750258062L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne()
-    @NotNull(message = ValidationMessages.FormularioNaoPodeSerVazio)
-    @JoinColumn(name = "formulario_id", referencedColumnName = "id")
-    private Formulario formulario;
+	@ManyToOne()
+	@NotNull(message = ValidationMessages.FormularioNaoPodeSerVazio)
+	@JoinColumn(name = "formulario_id", referencedColumnName = "id")
+	private Formulario formulario;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @NotNull(message = ValidationMessages.TipoAnexoNaoPodeSerVazio)
-    private TipoAnexoFormulario tipoAnexo;
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = ValidationMessages.TipoAnexoNaoPodeSerVazio)
+	private TipoAnexoFormulario tipoAnexo;
 
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    @NotBlank(message = ValidationMessages.DescricaoNaoPodeSerVazio)
-    private String descricao;
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	@NotBlank(message = ValidationMessages.DescricaoNaoPodeSerVazio)
+	private String descricao;
 
-    @Column(nullable = false)
-    @JsonDeserialize(using = LocalDateDeserializer.class)  
-    @JsonSerialize(using = LocalDateSerializer.class)
-    @NotNull(message = ValidationMessages.DataUploadNaoPodeSerVazio)
-    private LocalDate dataUpload;
+	@Column(nullable = false)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@NotNull(message = ValidationMessages.DataUploadNaoPodeSerVazio)
+	private LocalDate dataUpload;
 
-    @Column(columnDefinition = PGTypes.Text, nullable = false)
-    @NotBlank(message = ValidationMessages.CaminhoUploadNaoPodeSerVazio)
-    private String caminho;
+	@Column(columnDefinition = PGTypes.Text, nullable = false)
+	@NotBlank(message = ValidationMessages.CaminhoUploadNaoPodeSerVazio)
+	private String caminho;
 }
-
-

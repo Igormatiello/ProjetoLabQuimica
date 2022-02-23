@@ -21,63 +21,62 @@ import java.util.List;
 @RequestMapping("pessoa")
 public class PessoaController extends CrudController<Pessoa, Long> {
 
-    
-    private PessoaService pessoaService;
+	private PessoaService pessoaService;
 
-    public  PessoaController (PessoaService pessoaService) {
-        this.pessoaService =pessoaService;
-   }
-    
-    private PessoaRepository pessoaRepository;
+	public PessoaController(PessoaService pessoaService) {
+		this.pessoaService = pessoaService;
+	}
 
-    public  PessoaController (PessoaRepository pessoaRepository) {
-        this.pessoaRepository =pessoaRepository;
-   }
-    
-    private UserAccessor usuarioAccessor;
+	private PessoaRepository pessoaRepository;
 
-    public  PessoaController (UserAccessor usuarioAccessor) {
-        this.usuarioAccessor =usuarioAccessor;
-   }
-    
-    @Override
-    protected CrudService<Pessoa, Long> getService() {
-        return pessoaService;
-    }
+	public PessoaController(PessoaRepository pessoaRepository) {
+		this.pessoaRepository = pessoaRepository;
+	}
 
-    @GetMapping("dados-aprovacao/{id}")
-    public SolicitacaoCadastroViewModel getDadosAprovacao(@PathVariable Long id) {
-        return pessoaService.getDadosValidacaoCadastro(id);
-    }
+	private UserAccessor usuarioAccessor;
 
-    @GetMapping("doc-exists/{tipoPessoa}/{cpfCnpj}")
-    public ResultadoOperacaoViewModel<Object> existsComDocumento(@PathVariable TipoPessoa tipoPessoa,
-                                                                 @PathVariable String cpfCnpj) {
-        return pessoaService.findCpfCnpjCadastrado(tipoPessoa, cpfCnpj);
-    }
+	public PessoaController(UserAccessor usuarioAccessor) {
+		this.usuarioAccessor = usuarioAccessor;
+	}
 
-    @PostMapping("aprovar-solicitacao")
-    public ResultadoOperacaoViewModel<Pessoa> saveAprovacao(@RequestBody @Valid SolicitacaoCadastroViewModel source) {
-        var pessoa = pessoaService.saveValidarCadastro(source);
-        if (pessoa.isSucesso()) {
-            pessoaService.sendEmailRetornoSolicitacao(source.getEmail());
-        }
-        return pessoa;
-    }
+	@Override
+	protected CrudService<Pessoa, Long> getService() {
+		return pessoaService;
+	}
 
-    @GetMapping("buscaProfessor")
-    public List<Pessoa> buscaProfessores(){
-        return pessoaRepository.buscaProfessores();
-    }
+	@GetMapping("dados-aprovacao/{id}")
+	public SolicitacaoCadastroViewModel getDadosAprovacao(@PathVariable Long id) {
+		return pessoaService.getDadosValidacaoCadastro(id);
+	}
 
-    @GetMapping("buscaProfessorFormulario/{pessoaInstituicaoId}")
-    public List<Pessoa> buscaProfessoresFormulario(@PathVariable Long pessoaInstituicaoId){
-        return pessoaRepository.buscaProfessoresFormularios(pessoaInstituicaoId);
-    }
+	@GetMapping("doc-exists/{tipoPessoa}/{cpfCnpj}")
+	public ResultadoOperacaoViewModel<Object> existsComDocumento(@PathVariable TipoPessoa tipoPessoa,
+			@PathVariable String cpfCnpj) {
+		return pessoaService.findCpfCnpjCadastrado(tipoPessoa, cpfCnpj);
+	}
 
-    @GetMapping("buscaPessoaIdProfessorLogado")
-    public List<Pessoa> buscaPessoaIdProfessorLogado(){
-        return pessoaRepository.buscaProfessorByUsuarioId(usuarioAccessor.getUsuarioId());
-    }
+	@PostMapping("aprovar-solicitacao")
+	public ResultadoOperacaoViewModel<Pessoa> saveAprovacao(@RequestBody @Valid SolicitacaoCadastroViewModel source) {
+		var pessoa = pessoaService.saveValidarCadastro(source);
+		if (pessoa.isSucesso()) {
+			pessoaService.sendEmailRetornoSolicitacao(source.getEmail());
+		}
+		return pessoa;
+	}
+
+	@GetMapping("buscaProfessor")
+	public List<Pessoa> buscaProfessores() {
+		return pessoaRepository.buscaProfessores();
+	}
+
+	@GetMapping("buscaProfessorFormulario/{pessoaInstituicaoId}")
+	public List<Pessoa> buscaProfessoresFormulario(@PathVariable Long pessoaInstituicaoId) {
+		return pessoaRepository.buscaProfessoresFormularios(pessoaInstituicaoId);
+	}
+
+	@GetMapping("buscaPessoaIdProfessorLogado")
+	public List<Pessoa> buscaPessoaIdProfessorLogado() {
+		return pessoaRepository.buscaProfessorByUsuarioId(usuarioAccessor.getUsuarioId());
+	}
 
 }

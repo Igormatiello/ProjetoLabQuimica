@@ -9,21 +9,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LancamentoFinanceiroServiceImpl extends CrudServiceImpl<LancamentoFinanceiro, Long> implements LancamentoFinanceiroService {
-    
-	
+public class LancamentoFinanceiroServiceImpl extends CrudServiceImpl<LancamentoFinanceiro, Long>
+		implements LancamentoFinanceiroService {
 
-    private LancamentoFinanceiroRepository lancamentoFinanceiroRepository;
-    
-    
-    public LancamentoFinanceiroServiceImpl(LancamentoFinanceiroRepository lancamentoFinanceiroRepository) {
-        this.lancamentoFinanceiroRepository = lancamentoFinanceiroRepository;
-        }
-    
-    
+	private LancamentoFinanceiroRepository lancamentoFinanceiroRepository;
 
-    @Override
-    protected JpaRepository<LancamentoFinanceiro, Long> getRepository() {
-        return lancamentoFinanceiroRepository;
-    }
+	public LancamentoFinanceiroServiceImpl(LancamentoFinanceiroRepository lancamentoFinanceiroRepository) {
+		this.lancamentoFinanceiroRepository = lancamentoFinanceiroRepository;
+	}
+
+	@Override
+	protected JpaRepository<LancamentoFinanceiro, Long> getRepository() {
+		return lancamentoFinanceiroRepository;
+	}
 }

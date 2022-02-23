@@ -27,128 +27,90 @@ import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
 @DataJpaTest
 @AutoConfigureTestDatabase
 
-
 public class InstituicaoRepositoryTests {
 
-	
 	@Autowired
 	InstituicaoRepository repository;
-	
+
 	@Autowired
 	TestEntityManager entityManager;
-	
+
 	@Test
 	public void deveSalvarUmaInstituicao() {
-		
+
 		Instituicao instituicao = new Instituicao();
-		
-		instituicao= repository.save(instituicao);
+
+		instituicao = repository.save(instituicao);
 		Assertions.assertThat(instituicao.getId()).isNotNull();
-		
-		
-		
+
 	}
-	
+
 	@Test
 	public void deveDeletarUmaInstituicao() {
-		
-		Instituicao instituicao= criarEPersistirInstituicao();
+
+		Instituicao instituicao = criarEPersistirInstituicao();
 		repository.delete(instituicao);
-		
-		Instituicao instituicaoDeletada = entityManager.find(Instituicao.class,instituicao.getId() );
-		
-		
-		Assertions.assertThat(instituicaoDeletada).isNull();	
+
+		Instituicao instituicaoDeletada = entityManager.find(Instituicao.class, instituicao.getId());
+
+		Assertions.assertThat(instituicaoDeletada).isNull();
 	}
-	
+
 	@Test
 	public void deveBuscarUmaInstituicao() {
-		Instituicao instituicao= criarEPersistirInstituicao();
-		
-		java.util.Optional<Instituicao> instituicaoEncontrada= repository.findById(instituicao.getId());
-		
-		Assertions.assertThat(instituicaoEncontrada.isPresent()).isNotNull();
-		
-		
-	}
-	
-	
-	
-	
+		Instituicao instituicao = criarEPersistirInstituicao();
 
-	
+		java.util.Optional<Instituicao> instituicaoEncontrada = repository.findById(instituicao.getId());
+
+		Assertions.assertThat(instituicaoEncontrada.isPresent()).isNotNull();
+
+	}
+
 	@Test
 	public void deveAtualizarUmaInstituicao() {
-		
+
 		Instituicao instituicao = criarEPersistirInstituicao();
-	
-				instituicao.setId(2);
-				instituicao.setNome("utfpr new");
-				instituicao.setTipoInstituicao(TipoInstituicao.Externa);
-				Cidade cidade = new Cidade();
-				cidade.setId(21);
-				cidade.setNome("pato branco");
-				cidade.setUf("pr");
-				
-				
-				
-				instituicao.setCidade(cidade);
-				
-		
-		
-		
-		
+
+		instituicao.setId(2);
+		instituicao.setNome("utfpr new");
+		instituicao.setTipoInstituicao(TipoInstituicao.Externa);
+		Cidade cidade = new Cidade();
+		cidade.setId(21);
+		cidade.setNome("pato branco");
+		cidade.setUf("pr");
+
+		instituicao.setCidade(cidade);
+
 		repository.save(instituicao);
-		
-		
-		
+
 		Instituicao instituicaoNova = entityManager.find(Instituicao.class, instituicao.getId());
-		
-		
+
 		Assertions.assertThat(instituicaoNova.getNome()).isEqualTo("utfpr new");
 		Assertions.assertThat(instituicaoNova.getTipoInstituicao()).isEqualTo(TipoInstituicao.Externa);
 		Assertions.assertThat(instituicaoNova.getId()).isEqualTo(2);
 		Assertions.assertThat(instituicaoNova.getCidade().getId()).isEqualTo(21);
 		Assertions.assertThat(instituicaoNova.getCidade().getNome()).isEqualTo("pato branco");
 		Assertions.assertThat(instituicaoNova.getCidade().getUf()).isEqualTo("pr");
-	
+
 	}
-	
-	
-	
-	
+
 	private Instituicao criarEPersistirInstituicao() {
-		
-		Instituicao instituicao= criarInstituicao();
+
+		Instituicao instituicao = criarInstituicao();
 		entityManager.persist(instituicao);
 		return instituicao;
-		
+
 	}
-	
-	
-	
-	
-	
+
 	public static Instituicao criarInstituicao() {
-		
+
 		Cidade cidade = new Cidade();
 		cidade.setNome("cidade padrão");
 		cidade.setUf("uf padrão");
 		cidade.setId(1);
-		
-		
-		return Instituicao
-				.builder()
-				.nome("Utfpr")
-				.cidade(cidade)
-				.id(1)
-				.tipoInstituicao(TipoInstituicao.Interna)
+
+		return Instituicao.builder().nome("Utfpr").cidade(cidade).id(1).tipoInstituicao(TipoInstituicao.Interna)
 				.build();
-		
-		
-			
-		
-		
-		
+
 	}
 }

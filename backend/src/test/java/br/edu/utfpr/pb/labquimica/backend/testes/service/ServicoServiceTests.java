@@ -19,6 +19,7 @@ import br.edu.utfpr.pb.labquimica.backend.repository.PessoaRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.ServicoRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.impl.PessoaServiceImpl;
 import br.edu.utfpr.pb.labquimica.backend.service.impl.ServicoServiceImpl;
+import br.edu.utfpr.pb.labquimica.backend.testes.modelRepository.CriarObjetos;
 import br.edu.utfpr.pb.labquimica.backend.testes.modelRepository.EquipamentoRepositoryTests;
 
 @RunWith(SpringRunner.class)
@@ -28,84 +29,54 @@ public class ServicoServiceTests {
 
 	@SpyBean
 	ServicoServiceImpl service;
-	
+
 	@MockBean
 	ServicoRepository repository;
-	
-	EquipamentoRepositoryTests equipamentoTest;
-	
-	
+
 	@Test
 	public void deveObterUmaListaDeServicos() {
-		
-	Equipamento equipamento1= new Equipamento();
-	equipamento1= equipamentoTest.criarEquipamento();
-	equipamento1.setId(1);
-	
-	Equipamento equipamento2= new Equipamento();
-	equipamento2= equipamentoTest.criarEquipamento();
-	equipamento2.setId(2);
-	
-	Equipamento equipamento3= new Equipamento();
-	equipamento3= equipamentoTest.criarEquipamento();
-	equipamento3.setId(3);
-	
-	Equipamento equipamento4= new Equipamento();
-	equipamento4= equipamentoTest.criarEquipamento();
-	equipamento4.setId(4);
-	
-	
-	List<Servico> listaServicos=new ArrayList<>();
-	
-	Servico serv1= new Servico();
-	serv1.setEquipamento(equipamento1);
-	serv1.setId(1);
-	serv1.setDescricao("primeiro");
-	
-	Servico serv2= new Servico();
-	serv2.setEquipamento(equipamento1);
-	serv2.setId(2);
-	serv2.setDescricao("segundo");;
-	
-	Servico serv3= new Servico();
-	serv3.setEquipamento(equipamento3);
-	serv3.setId(3);
-	serv3.setDescricao("terceiro");
-	
-	Servico serv4= new Servico();
-	serv4.setEquipamento(equipamento4);
-	serv4.setId(4);
-	serv4.setDescricao("quarto");
-	
-	
-	
-	//listaServicos.add(serv4);
-	//listaServicos.add(serv3);
-	listaServicos.add(serv2);
-	listaServicos.add(serv1);
-	
 
-		
+		Equipamento equipamento1 = new Equipamento();
+		equipamento1 = CriarObjetos.criarEquipamento();
+		equipamento1.setId(1);
 
-    Mockito.when(repository.findAllByEquipamentoIdOrderByDescricao(1)).thenReturn( listaServicos);
-    		
-    Mockito.when(repository.findAllByEquipamentoIdOrderByDescricao(2)).thenReturn( null);
-	
-			
-			
-			
-			
-			List<Servico> resultado= service.findAllByEquipamentoIdOrderByDescricao(1);
-			
-			Assertions.assertThat(resultado).isNotEmpty().hasSize(2).contains(serv2,serv1);
-			
-			List<Servico> resultado2= service.findAllByEquipamentoIdOrderByDescricao(3);
-			
-			Assertions.assertThat(resultado2).isEmpty();
+		Servico serv1 = new Servico();
+		serv1.setEquipamento(equipamento1);
+		serv1.setId(1);
+		serv1.setDescricao("primeiro");
 
-			
-			
+		Servico serv2 = new Servico();
+		serv2.setEquipamento(equipamento1);
+		serv2.setId(1);
+		serv2.setDescricao("segundo");
+
+		List<Servico> resultado = service.findAllByEquipamentoIdOrderByDescricao(1);
+
+		Assertions.assertThat(resultado).isNotEmpty().hasSize(2).contains(serv2, serv1);
+
 	}
-	
-	
+
+	@Test
+	public void deveRetornarUmaListaVaziaDeServicos() {
+
+		Equipamento equipamento1 = new Equipamento();
+		equipamento1 = CriarObjetos.criarEquipamento();
+		equipamento1.setId(1);
+
+		Servico serv1 = new Servico();
+		serv1.setEquipamento(equipamento1);
+		serv1.setId(1);
+		serv1.setDescricao("descricao");
+
+		Servico serv2 = new Servico();
+		serv2.setEquipamento(equipamento1);
+		serv2.setId(1);
+		serv2.setDescricao("segundo");
+
+		List<Servico> resultado = service.findAllByEquipamentoIdOrderByDescricao(2);
+
+		Assertions.assertThat(resultado).isNull();
+
+	}
+
 }

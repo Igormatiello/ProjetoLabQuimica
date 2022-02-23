@@ -13,13 +13,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class EquipamentoServiceImpl extends CrudServiceImpl<Equipamento, Integer> implements EquipamentoService {
 
-	
 	private EquipamentoRepository equipamentoRepository;
-	
+
 	public EquipamentoServiceImpl(EquipamentoRepository equipamentoRepository) {
-	    this.equipamentoRepository = equipamentoRepository;
-	    }
-	
+		this.equipamentoRepository = equipamentoRepository;
+	}
+
 	@Override
 	protected JpaRepository<Equipamento, Integer> getRepository() {
 		return equipamentoRepository;

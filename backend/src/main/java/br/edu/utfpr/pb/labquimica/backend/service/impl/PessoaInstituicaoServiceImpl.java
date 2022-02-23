@@ -11,43 +11,44 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PessoaInstituicaoServiceImpl extends CrudServiceImpl<PessoaInstituicao, Long> implements PessoaInstituicaoService {
+public class PessoaInstituicaoServiceImpl extends CrudServiceImpl<PessoaInstituicao, Long>
+		implements PessoaInstituicaoService {
 
- 
-    private PessoaInstituicaoRepository pessoaInstituicaoRepository;
-    
-    
-    public PessoaInstituicaoServiceImpl(PessoaInstituicaoRepository pessoaInstituicaoRepository) {
-        this.pessoaInstituicaoRepository = pessoaInstituicaoRepository;
-        }
-    
-    @Override
-    protected JpaRepository<PessoaInstituicao, Long> getRepository() {
-        return pessoaInstituicaoRepository;
-    }
+	private PessoaInstituicaoRepository pessoaInstituicaoRepository;
 
-    @Override
-    public PessoaInstituicao findByInstituicaoNomeAndPessoaDocumentoAndEhProfessorTrue(String nome, String cpfProfessor) {
-        return pessoaInstituicaoRepository.findByInstituicaoNomeAndPessoaDocumentoAndEhProfessorTrue(nome, cpfProfessor);
-    }
+	public PessoaInstituicaoServiceImpl(PessoaInstituicaoRepository pessoaInstituicaoRepository) {
+		this.pessoaInstituicaoRepository = pessoaInstituicaoRepository;
+	}
 
-    @Override
-    public List<PessoaInstituicao> findPessoaInstituicao(Long usuarioId) {
-        return pessoaInstituicaoRepository.findPessoaInstituicao(usuarioId);
-    }
+	@Override
+	protected JpaRepository<PessoaInstituicao, Long> getRepository() {
+		return pessoaInstituicaoRepository;
+	}
 
-    @Override
-    public List<PessoaInstituicao> findPessoaInstituicao(Long usuarioId, Integer instituicaoId) {
-        return pessoaInstituicaoRepository.findPessoaInstituicao(usuarioId, instituicaoId);
-    }
+	@Override
+	public PessoaInstituicao findByInstituicaoNomeAndPessoaDocumentoAndEhProfessorTrue(String nome,
+			String cpfProfessor) {
+		return pessoaInstituicaoRepository.findByInstituicaoNomeAndPessoaDocumentoAndEhProfessorTrue(nome,
+				cpfProfessor);
+	}
 
-    @Override
-    public List<PessoaInstituicao> findByInstituicao(Integer instituicaoId) {
-        return pessoaInstituicaoRepository.findByInstituicaoId(instituicaoId);
-    }
+	@Override
+	public List<PessoaInstituicao> findPessoaInstituicao(Long usuarioId) {
+		return pessoaInstituicaoRepository.findPessoaInstituicao(usuarioId);
+	}
 
-    @Override
-    public List<PessoaInstituicao> findByPessoaId(Long pessoaId) {
-        return pessoaInstituicaoRepository.findByPessoaId(pessoaId);
-    }
+	@Override
+	public List<PessoaInstituicao> findPessoaInstituicao(Long usuarioId, Integer instituicaoId) {
+		return pessoaInstituicaoRepository.findPessoaInstituicao(usuarioId, instituicaoId);
+	}
+
+	@Override
+	public List<PessoaInstituicao> findByInstituicao(Integer instituicaoId) {
+		return pessoaInstituicaoRepository.findByInstituicaoId(instituicaoId);
+	}
+
+	@Override
+	public List<PessoaInstituicao> findByPessoaId(Long pessoaId) {
+		return pessoaInstituicaoRepository.findByPessoaId(pessoaId);
+	}
 }

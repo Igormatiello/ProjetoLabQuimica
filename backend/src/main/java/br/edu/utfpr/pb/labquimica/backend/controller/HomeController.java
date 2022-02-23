@@ -17,19 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("home")
 public class HomeController {
 
-  
-    private HomeService homeService;
-    
-    public HomeController( HomeService homeService) {
-        this.homeService =homeService;
-   }
-    
+	private HomeService homeService;
 
-    @GetMapping("find-dados-indicadores")
-    public Indicadores findDadosIndicadores(@RequestParam("dtIni") String dtIni,
-                                            @RequestParam("dtFim") String dtFim) {
-        return homeService.findDadosIndicadores(
-                LocalDate.parse(dtIni), LocalDate.parse(dtFim) //modificado do original
-        );
-    }
+	public HomeController(HomeService homeService) {
+		this.homeService = homeService;
+	}
+
+	@GetMapping("find-dados-indicadores")
+	public Indicadores findDadosIndicadores(@RequestParam("dtIni") String dtIni, @RequestParam("dtFim") String dtFim) {
+		return homeService.findDadosIndicadores(LocalDate.parse(dtIni), LocalDate.parse(dtFim) // modificado do original
+		);
+	}
 }

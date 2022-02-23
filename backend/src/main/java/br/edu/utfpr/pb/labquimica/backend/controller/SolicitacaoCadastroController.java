@@ -22,34 +22,34 @@ import java.util.List;
 @RequestMapping("solicitacao-cadastro")
 public class SolicitacaoCadastroController extends CrudController<SolicitacaoCadastro, Long> {
 
-   
-    private SolicitacaoCadastroService solicitacaoCadastroService;
+	private SolicitacaoCadastroService solicitacaoCadastroService;
 
-    public   SolicitacaoCadastroController(SolicitacaoCadastroService solicitacaoCadastroService) {
-        this.solicitacaoCadastroService =solicitacaoCadastroService;
-   }
-    
-    @Override
-    protected CrudService<SolicitacaoCadastro, Long> getService() {
-        return solicitacaoCadastroService;
-    }
+	public SolicitacaoCadastroController(SolicitacaoCadastroService solicitacaoCadastroService) {
+		this.solicitacaoCadastroService = solicitacaoCadastroService;
+	}
 
-    @Override
-    public SolicitacaoCadastro save(@RequestBody SolicitacaoCadastro entity) {
-        throw new NotImplementedException();
-    }
+	@Override
+	protected CrudService<SolicitacaoCadastro, Long> getService() {
+		return solicitacaoCadastroService;
+	}
 
-    @PostMapping("new")
-    public ResultadoOperacaoViewModel<SolicitacaoCadastro> saveAprovacao(@RequestBody @Valid SolicitacaoCadastro source){
-        var newSolicitacao = solicitacaoCadastroService.saveWithValidation(source);
-        if (newSolicitacao.isSucesso()) {
-            solicitacaoCadastroService.sendEmailToResponsavelLiberacao();
-        }
-        return solicitacaoCadastroService.saveWithValidation(source);
-    }
+	@Override
+	public SolicitacaoCadastro save(@RequestBody SolicitacaoCadastro entity) {
+		throw new NotImplementedException();
+	}
 
-    @Override
-    public List<SolicitacaoCadastro> findAll() {
-        return solicitacaoCadastroService.findSolicitacoesAbertas();
-    }
+	@PostMapping("new")
+	public ResultadoOperacaoViewModel<SolicitacaoCadastro> saveAprovacao(
+			@RequestBody @Valid SolicitacaoCadastro source) {
+		var newSolicitacao = solicitacaoCadastroService.saveWithValidation(source);
+		if (newSolicitacao.isSucesso()) {
+			solicitacaoCadastroService.sendEmailToResponsavelLiberacao();
+		}
+		return solicitacaoCadastroService.saveWithValidation(source);
+	}
+
+	@Override
+	public List<SolicitacaoCadastro> findAll() {
+		return solicitacaoCadastroService.findSolicitacoesAbertas();
+	}
 }

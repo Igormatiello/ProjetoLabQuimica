@@ -6,34 +6,34 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(of = "id")
 public class FormularioAnaliseViewModel {
 
-    private Long formularioId;
+	private Long formularioId;
 
-    private StatusFormulario status;
+	private StatusFormulario status;
 
-    private String motivoRejeicao;
+	private String motivoRejeicao;
 
-    public Long getFormularioId() {
-        return formularioId;
-    }
+	public Long getFormularioId() {
+		return formularioId;
+	}
 
-    public FormularioAnaliseViewModel setFormularioId(Long formularioId) {
-        this.formularioId = formularioId;
-        return this;
-    }
+	public FormularioAnaliseViewModel setFormularioId(Long formularioId) {
+		this.formularioId = formularioId;
+		return this;
+	}
 
-    public StatusFormulario getStatus() {
-        return status;
-    }
+	public StatusFormulario getStatus() {
+		return status;
+	}
 
-    public void setStatus(StatusFormulario status) {
-        this.status = status;
-    }
+	public void setStatus(StatusFormulario status) {
+		this.status = status;
+	}
 
-    public String getMotivoRejeicao() {
-        return motivoRejeicao;
-    }
+	public String getMotivoRejeicao() {
+		return motivoRejeicao;
+	}
 
-    public void setMotivoRejeicao(String motivoRejeicao) {
-        this.motivoRejeicao = motivoRejeicao;
-    }
+	public void setMotivoRejeicao(String motivoRejeicao) {
+		this.motivoRejeicao = motivoRejeicao;
+	}
 }

@@ -20,43 +20,38 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Table
 @EqualsAndHashCode(of = "id")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class PessoaInstituicao implements Serializable {
-    private static final long serialVersionUID = -8727132008984758268L;
+	private static final long serialVersionUID = -8727132008984758268L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "instituicao_id", referencedColumnName = "id")
-    @NotNull(message = ValidationMessages.InstituicaoNaoPodeSerVazio)
-    private Instituicao instituicao;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "instituicao_id", referencedColumnName = "id")
+	@NotNull(message = ValidationMessages.InstituicaoNaoPodeSerVazio)
+	private Instituicao instituicao;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-    @NotNull(message = ValidationMessages.PessoaNaoPodeSerVazio)
-    private Pessoa pessoa;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+	@NotNull(message = ValidationMessages.PessoaNaoPodeSerVazio)
+	private Pessoa pessoa;
 
-    @Convert(converter = BooleanConverter.class)
-    @Column(columnDefinition = "char(1) default 'S'")
-    private boolean ehAtivo;
+	@Convert(converter = BooleanConverter.class)
+	@Column(columnDefinition = "char(1) default 'S'")
+	private boolean ehAtivo;
 
-    @Column(nullable = true)
-    private Double creditoVigente = 0.0;
+	@Column(nullable = true)
+	private Double creditoVigente = 0.0;
 
-    @Convert(converter = BooleanConverter.class)
-    @Column(columnDefinition = "char(1) default 'N'")
-    private boolean ehProfessor;
+	@Convert(converter = BooleanConverter.class)
+	@Column(columnDefinition = "char(1) default 'N'")
+	private boolean ehProfessor;
 
-    @Override
-    public String toString(){
-        return this.getId().toString();
-    }
+	@Override
+	public String toString() {
+		return this.getId().toString();
+	}
 
 }
-
-
-
-
-

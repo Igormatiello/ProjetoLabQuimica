@@ -11,19 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("anexo-formulario")
-public class AnexoFormularioController  extends CrudController<AnexoFormulario, Long>{
-   
-    private AnexoFormularioService anexoFormularioService;
+public class AnexoFormularioController extends CrudController<AnexoFormulario, Long> {
 
+	private AnexoFormularioService anexoFormularioService;
 
-    public AnexoFormularioController(AnexoFormularioService anexoFormularioService) {
-        this.anexoFormularioService = anexoFormularioService;
-        
-   }
-    
-    
-    @Override
-    protected CrudService<AnexoFormulario, Long> getService() {
-        return anexoFormularioService;
-    }
+	public AnexoFormularioController(AnexoFormularioService anexoFormularioService) {
+		this.anexoFormularioService = anexoFormularioService;
+
+	}
+
+	@Override
+	protected CrudService<AnexoFormulario, Long> getService() {
+		return anexoFormularioService;
+	}
 }

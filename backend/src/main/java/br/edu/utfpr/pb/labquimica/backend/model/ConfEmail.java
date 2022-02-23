@@ -19,25 +19,25 @@ import java.io.Serializable;
 @Table(name = "confEmail")
 public class ConfEmail implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    private String host;
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	private String host;
 
-    @Column(nullable = false)
-    private Integer porta;
+	@Column(nullable = false)
+	private Integer porta;
 
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    private String remetente;
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	private String remetente;
 
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    private String usuario;
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	private String usuario;
 
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    private String senha;
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	private String senha;
 
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    private String emailRecebimento;
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	private String emailRecebimento;
 }

@@ -9,6 +9,6 @@ import lombok.Data;
 @Builder
 public class IndicadorSolicitacaoCadastro {
 
-    private String categoria;
-    private Integer qtdeSolicitacao;
+	private String categoria;
+	private Integer qtdeSolicitacao;
 }

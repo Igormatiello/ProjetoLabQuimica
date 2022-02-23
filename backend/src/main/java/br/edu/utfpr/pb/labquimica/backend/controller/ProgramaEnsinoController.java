@@ -14,16 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("programa-ensino")
 public class ProgramaEnsinoController extends CrudController<ProgramaEnsino, Long> {
 
-   
-    private ProgramaEnsinoService programaEnsinoService;
-    
-    public  ProgramaEnsinoController(ProgramaEnsinoService programaEnsinoService) {
-        this.programaEnsinoService =programaEnsinoService;
-   }
-    
+	private ProgramaEnsinoService programaEnsinoService;
 
-    @Override
-    protected CrudService<ProgramaEnsino, Long> getService() {
-        return programaEnsinoService;
-    }
+	public ProgramaEnsinoController(ProgramaEnsinoService programaEnsinoService) {
+		this.programaEnsinoService = programaEnsinoService;
+	}
+
+	@Override
+	protected CrudService<ProgramaEnsino, Long> getService() {
+		return programaEnsinoService;
+	}
 }

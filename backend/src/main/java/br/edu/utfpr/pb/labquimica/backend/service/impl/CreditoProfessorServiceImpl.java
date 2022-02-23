@@ -13,53 +13,49 @@ import java.security.Principal;
 import java.time.LocalDate;
 
 @Service
-public class CreditoProfessorServiceImpl extends CrudServiceImpl<CreditoProfessor,Long> implements CreditoProfessorService {
+public class CreditoProfessorServiceImpl extends CrudServiceImpl<CreditoProfessor, Long>
+		implements CreditoProfessorService {
 
-    
-    private CreditoProfessorRepository creditoProfessorRepository;
+	private CreditoProfessorRepository creditoProfessorRepository;
 
-    public CreditoProfessorServiceImpl(CreditoProfessorRepository creditoProfessorRepository) {
-        this.creditoProfessorRepository = creditoProfessorRepository;
-        }
-    
-    
-   
-    private CreditoProfessorService creditoProfessorService;
-    
-    public CreditoProfessorServiceImpl(CreditoProfessorService creditoProfessorService) {
-        this.creditoProfessorService = creditoProfessorService;
-        }
-    
-    
+	public CreditoProfessorServiceImpl(CreditoProfessorRepository creditoProfessorRepository) {
+		this.creditoProfessorRepository = creditoProfessorRepository;
+	}
 
-    @Override
-    public ResultadoOperacaoViewModel<CreditoProfessor> saveWithValidation(CreditoProfessor entity) {
-        var result = new ResultadoOperacaoViewModel<CreditoProfessor>();
+	private CreditoProfessorService creditoProfessorService;
 
-        boolean idExist;
-        if (entity.getId() != null){
-            idExist = creditoProfessorRepository.existsById(entity.getId());
-        } else{
-            idExist = false;
-        }
+	public CreditoProfessorServiceImpl(CreditoProfessorService creditoProfessorService) {
+		this.creditoProfessorService = creditoProfessorService;
+	}
 
-        LocalDate dataAtual = LocalDate.now();
+	@Override
+	public ResultadoOperacaoViewModel<CreditoProfessor> saveWithValidation(CreditoProfessor entity) {
+		var result = new ResultadoOperacaoViewModel<CreditoProfessor>();
 
-        if(idExist){
-            entity.setDataInclusao(creditoProfessorService.findOne(entity.getId()).getDataInclusao());
-        } else{
-            entity.setDataInclusao(dataAtual);
-        }
+		boolean idExist;
+		if (entity.getId() != null) {
+			idExist = creditoProfessorRepository.existsById(entity.getId());
+		} else {
+			idExist = false;
+		}
 
-        entity.setDataAtualizacao(dataAtual);
+		LocalDate dataAtual = LocalDate.now();
 
-        super.save(entity);
+		if (idExist) {
+			entity.setDataInclusao(creditoProfessorService.findOne(entity.getId()).getDataInclusao());
+		} else {
+			entity.setDataInclusao(dataAtual);
+		}
 
-        return result.returningSuccess(entity);
-    }
+		entity.setDataAtualizacao(dataAtual);
 
-    @Override
-    protected JpaRepository<CreditoProfessor, Long> getRepository() {
-        return creditoProfessorRepository;
-    }
+		super.save(entity);
+
+		return result.returningSuccess(entity);
+	}
+
+	@Override
+	protected JpaRepository<CreditoProfessor, Long> getRepository() {
+		return creditoProfessorRepository;
+	}
 }

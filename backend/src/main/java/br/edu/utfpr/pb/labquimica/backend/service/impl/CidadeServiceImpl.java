@@ -11,23 +11,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CidadeServiceImpl extends CrudServiceImpl<Cidade,Integer> implements CidadeService {
+public class CidadeServiceImpl extends CrudServiceImpl<Cidade, Integer> implements CidadeService {
 
- 
-    private CidadeRepository cidadeRepository;
-    
-    public CidadeServiceImpl(CidadeRepository cidadeRepository) {
-        this.cidadeRepository = cidadeRepository;
-        }
-    
-    
-    @Override
-    protected JpaRepository<Cidade, Integer> getRepository() {
-        return cidadeRepository;
-    }
+	private CidadeRepository cidadeRepository;
 
-    @Override
-    public List<Cidade> findByNomeContainingIgnoreCaseOrderByNomeAsc(String nome) {
-        return cidadeRepository.findByNomeContainingIgnoreCaseOrderByNomeAsc(nome);
-    }
+	public CidadeServiceImpl(CidadeRepository cidadeRepository) {
+		this.cidadeRepository = cidadeRepository;
+	}
+
+	@Override
+	protected JpaRepository<Cidade, Integer> getRepository() {
+		return cidadeRepository;
+	}
+
+	@Override
+	public List<Cidade> findByNomeContainingIgnoreCaseOrderByNomeAsc(String nome) {
+		return cidadeRepository.findByNomeContainingIgnoreCaseOrderByNomeAsc(nome);
+	}
 }

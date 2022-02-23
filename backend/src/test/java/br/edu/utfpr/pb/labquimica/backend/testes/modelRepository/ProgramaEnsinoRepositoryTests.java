@@ -22,105 +22,75 @@ import br.edu.utfpr.pb.labquimica.backend.repository.ProgramaEnsinoRepository;
 
 public class ProgramaEnsinoRepositoryTests {
 
-	
 	@Autowired
 	ProgramaEnsinoRepository repository;
-	
+
 	@Autowired
 	TestEntityManager entityManager;
-	
+
 	@Test
 	public void deveSalvarUmProgramaEnsino() {
-		
-		ProgramaEnsino programaEnsino= criarProgramaEnsino();
-			
-		//programaEnsino= repository.save(programaEnsino);
+
+		ProgramaEnsino programaEnsino = criarProgramaEnsino();
+
+		// programaEnsino= repository.save(programaEnsino);
 		Assertions.assertThat(programaEnsino.getId()).isNotNull();
-		
-		
-		
+
 	}
-	
+
 	@Test
 	public void deveDeletarUmProgramaEnsino() {
-		
-		ProgramaEnsino programaEnsino= criarProgramaEnsino();
+
+		ProgramaEnsino programaEnsino = criarProgramaEnsino();
 		entityManager.persist(programaEnsino);
-		programaEnsino= entityManager.find(ProgramaEnsino.class, programaEnsino.getId());
-		
+		programaEnsino = entityManager.find(ProgramaEnsino.class, programaEnsino.getId());
+
 		repository.delete(programaEnsino);
-		
+
 		ProgramaEnsino programaEnsinoDeletado = entityManager.find(ProgramaEnsino.class, programaEnsino);
-		
-		
-		Assertions.assertThat(programaEnsinoDeletado).isNull();	
+
+		Assertions.assertThat(programaEnsinoDeletado).isNull();
 	}
-	
+
 	@Test
 	public void deveBuscarUmProgramEnsino() {
-		ProgramaEnsino programaEnsino= criarEPersistirUmProgramaEnsino();
-		
-		
-		
-		java.util.Optional<ProgramaEnsino> ProgramaEnsinoEncontrado= repository.findById(programaEnsino.getId());
-		
-		
-		Assertions.assertThat(ProgramaEnsinoEncontrado.isPresent()).isNotNull();
-		
-		
-	}
-	
-	
-	
-	
+		ProgramaEnsino programaEnsino = criarEPersistirUmProgramaEnsino();
 
-	
+		java.util.Optional<ProgramaEnsino> ProgramaEnsinoEncontrado = repository.findById(programaEnsino.getId());
+
+		Assertions.assertThat(ProgramaEnsinoEncontrado.isPresent()).isNotNull();
+
+	}
+
 	@Test
 	public void deveAtualizarUmProgramaEnsino() {
-		
-		ProgramaEnsino programaEnsino= criarEPersistirUmProgramaEnsino();
-		
+
+		ProgramaEnsino programaEnsino = criarEPersistirUmProgramaEnsino();
+
 		programaEnsino.setSigla("TC");
 		programaEnsino.setNome("Trabalho Científico");
-		
-		
+
 		repository.save(programaEnsino);
-		
-		
-		
+
 		ProgramaEnsino programaEnsinoAtualizado = entityManager.find(ProgramaEnsino.class, programaEnsino.getId());
-		
-		
+
 		Assertions.assertThat(programaEnsino.getNome()).isEqualTo("Trabalho Cientifico");
 		Assertions.assertThat(programaEnsino.getSigla()).isEqualTo("TC");
-		
+
 	}
-	
-	
-	
-	
+
 	private ProgramaEnsino criarEPersistirUmProgramaEnsino() {
-		
-		ProgramaEnsino programaEnsino= criarProgramaEnsino();
+
+		ProgramaEnsino programaEnsino = criarProgramaEnsino();
 		entityManager.persist(programaEnsino);
 		return programaEnsino;
-		
+
 	}
-	
-	
-	
-	
+
 	public static ProgramaEnsino criarProgramaEnsino() {
-		
-		return
-				ProgramaEnsino
-				.builder()
-				.nome("Trabalho de Conclusão de Curso")
-				.sigla("TCC")
-				.build();
-		
+
+		return ProgramaEnsino.builder().nome("Trabalho de Conclusão de Curso").sigla("TCC").build();
+
 	}
-	
-	
 
 }

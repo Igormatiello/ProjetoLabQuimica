@@ -9,18 +9,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AnexoFormularioServiceImpl extends CrudServiceImpl<AnexoFormulario, Long> implements AnexoFormularioService {
-   
-	
-	
-    private AnexoFormularioRepository anexoFormularioRepository;
+public class AnexoFormularioServiceImpl extends CrudServiceImpl<AnexoFormulario, Long>
+		implements AnexoFormularioService {
 
-    public AnexoFormularioServiceImpl(AnexoFormularioRepository anexoFormularioRepository) {
-        this.anexoFormularioRepository = anexoFormularioRepository;
-        }
-    
-    @Override
-    protected JpaRepository<AnexoFormulario, Long> getRepository() {
-        return anexoFormularioRepository;
-    }
+	private AnexoFormularioRepository anexoFormularioRepository;
+
+	public AnexoFormularioServiceImpl(AnexoFormularioRepository anexoFormularioRepository) {
+		this.anexoFormularioRepository = anexoFormularioRepository;
+	}
+
+	@Override
+	protected JpaRepository<AnexoFormulario, Long> getRepository() {
+		return anexoFormularioRepository;
+	}
 }

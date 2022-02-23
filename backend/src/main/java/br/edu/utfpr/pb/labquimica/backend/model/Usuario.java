@@ -25,97 +25,97 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = { "id" })
 public class Usuario implements UserDetails {
 
-    private static final BCryptPasswordEncoder bCrypts = new BCryptPasswordEncoder(10);
-    private static final long serialVersionUID = 3405633164317529200L;
+	private static final BCryptPasswordEncoder bCrypts = new BCryptPasswordEncoder(10);
+	private static final long serialVersionUID = 3405633164317529200L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    @NotBlank(message = ValidationMessages.UserNameNaoPodeSerVazio)
-    private String username;
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	@NotBlank(message = ValidationMessages.UserNameNaoPodeSerVazio)
+	private String username;
 
-    @Column(length = DefaultFields.SENHA, nullable = false)
-    private String password;
+	@Column(length = DefaultFields.SENHA, nullable = false)
+	private String password;
 
-    @Column
-    private Date lastPasswordReset;
+	@Column
+	private Date lastPasswordReset;
 
-    @Convert(converter = BooleanConverter.class)
-    @Column(columnDefinition = "char(1) default 'S'")
-    private boolean enabled;
+	@Convert(converter = BooleanConverter.class)
+	@Column(columnDefinition = "char(1) default 'S'")
+	private boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Papel> papeis;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Papel> papeis;
 
-    @OneToOne(optional = true, mappedBy = "usuario")
-    private Pessoa pessoa;
+	@OneToOne(optional = true, mappedBy = "usuario")
+	private Pessoa pessoa;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return papeis;
-    }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return papeis;
+	}
 
-    public void addPermissao(Papel papel) {
-        if (papeis == null) {
-            papeis = new HashSet<>();
-        }
-        papeis.add(papel);
-    }
+	public void addPermissao(Papel papel) {
+		if (papeis == null) {
+			papeis = new HashSet<>();
+		}
+		papeis.add(papel);
+	}
 
-    public String getEncondedPassword(String pass) {
-        if (pass != null && !pass.equals("")) {
-            return bCrypts.encode(this.getPassword());
-        }
-        return pass;
-    }
+	public String getEncondedPassword(String pass) {
+		if (pass != null && !pass.equals("")) {
+			return bCrypts.encode(this.getPassword());
+		}
+		return pass;
+	}
 
-    @PreRemove
-    private void removerPapeis() {
-        this.papeis.clear();
-    }
+	@PreRemove
+	private void removerPapeis() {
+		this.papeis.clear();
+	}
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
+	@Override
+	public String getUsername() {
+		return username;
+	}
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
 
-    @Transient
-    public boolean jaCriptografada;
+	@Transient
+	public boolean jaCriptografada;
 
-    @PrePersist
-    private void preSave() {
-        if (papeis.stream().anyMatch(x -> x.getId() == 3L))
-            return;
+	@PrePersist
+	private void preSave() {
+		if (papeis.stream().anyMatch(x -> x.getId() == 3L))
+			return;
 
-        if (!jaCriptografada) {
-            if (getId() == null || getId() == 0) {
-                setPassword(getEncondedPassword(getPassword()));
-            }
-        }
-    }
+		if (!jaCriptografada) {
+			if (getId() == null || getId() == 0) {
+				setPassword(getEncondedPassword(getPassword()));
+			}
+		}
+	}
 }

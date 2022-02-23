@@ -17,22 +17,17 @@ import java.io.Serializable;
 @Table
 @EqualsAndHashCode(of = "id")
 public class ProgramaEnsino implements Serializable {
-    private static final long serialVersionUID = -3346120304395527353L;
+	private static final long serialVersionUID = -3346120304395527353L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @NotBlank(message = ValidationMessages.NomeNaoPodeSerVazio)
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    private String nome;
+	@NotBlank(message = ValidationMessages.NomeNaoPodeSerVazio)
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	private String nome;
 
-    @NotBlank(message = ValidationMessages.SiglaNaoPodeSerVazio)
-    @Column(length = DefaultFields.DESCRICAO_CURTA, nullable = false)
-    private String sigla;
+	@NotBlank(message = ValidationMessages.SiglaNaoPodeSerVazio)
+	@Column(length = DefaultFields.DESCRICAO_CURTA, nullable = false)
+	private String sigla;
 }
-
-
-
-
-

@@ -17,25 +17,24 @@ import java.util.Optional;
 @RequestMapping("cidade")
 public class CidadeController extends CrudController<Cidade, Integer> {
 
-    
-    private CidadeService cidadeService;
-  
-    public CidadeController(CidadeService cidadeService) {
-        this.cidadeService = cidadeService;
-        
-   }
+	private CidadeService cidadeService;
 
-    @Override
-    protected CrudService<Cidade, Integer> getService() {
-        return cidadeService;
-    }
+	public CidadeController(CidadeService cidadeService) {
+		this.cidadeService = cidadeService;
 
-    @GetMapping("busca")
-    public List<Cidade> findByNome(@RequestParam("nome") Optional<String> nome) {
-        if(!nome.isEmpty()){
-            return cidadeService.findByNomeContainingIgnoreCaseOrderByNomeAsc(nome.get());
-        }else{
-            return cidadeService.findAll();
-        }
-    }
+	}
+
+	@Override
+	protected CrudService<Cidade, Integer> getService() {
+		return cidadeService;
+	}
+
+	@GetMapping("busca")
+	public List<Cidade> findByNome(@RequestParam("nome") Optional<String> nome) {
+		if (!nome.isEmpty()) {
+			return cidadeService.findByNomeContainingIgnoreCaseOrderByNomeAsc(nome.get());
+		} else {
+			return cidadeService.findAll();
+		}
+	}
 }

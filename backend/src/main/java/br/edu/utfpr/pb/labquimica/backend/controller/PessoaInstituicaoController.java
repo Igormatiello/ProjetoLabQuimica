@@ -21,58 +21,55 @@ import java.util.List;
 @RequestMapping("pessoa-instituicao")
 public class PessoaInstituicaoController extends CrudController<PessoaInstituicao, Long> {
 
-    
-    private PessoaInstituicaoService pessoaInstituicaoService;
-    
-    public  PessoaInstituicaoController (PessoaInstituicaoService pessoaInstituicaoService) {
-        this.pessoaInstituicaoService =pessoaInstituicaoService;
-   }
-    
-   
-    private UserAccessor usuarioAccessor;
-    
-    public  PessoaInstituicaoController (UserAccessor usuarioAccessor) {
-        this.usuarioAccessor =usuarioAccessor;
-   }
-    
-   
-    private ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService;
-    
-    public  PessoaInstituicaoController (ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService) {
-        this.participacaoProgramaEnsinoService =participacaoProgramaEnsinoService;
-   }
+	private PessoaInstituicaoService pessoaInstituicaoService;
 
-    @Override
-    protected CrudService<PessoaInstituicao, Long> getService() {
-        return pessoaInstituicaoService;
-    }
+	public PessoaInstituicaoController(PessoaInstituicaoService pessoaInstituicaoService) {
+		this.pessoaInstituicaoService = pessoaInstituicaoService;
+	}
 
-    @GetMapping("instituicao/{instituicaoId}")
-    public List<PessoaInstituicao> findByInstituicao(@PathVariable Integer instituicaoId) {
-        return pessoaInstituicaoService.findPessoaInstituicao(usuarioAccessor.getUsuarioId(), instituicaoId);
-    }
+	private UserAccessor usuarioAccessor;
 
-    @GetMapping("instituicao-sem-usuario/{instituicaoId}")
-    public List<PessoaInstituicao> findByInstituicaoSemUsuario(@PathVariable Integer instituicaoId) {
-        return pessoaInstituicaoService.findByInstituicao(instituicaoId);
-    }
+	public PessoaInstituicaoController(UserAccessor usuarioAccessor) {
+		this.usuarioAccessor = usuarioAccessor;
+	}
 
-    @GetMapping("instituicoes/{pessoaId}")
-    public List<PessoaInstituicao> findByPessoaId(@PathVariable Long pessoaId) {
-        return pessoaInstituicaoService.findByPessoaId(pessoaId);
-    }
+	private ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService;
 
-    @Override
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
-        for (ParticipacaoProgramaEnsino programa:participacaoProgramaEnsinoService.findParticipacaoPrograma(id)) {
-            participacaoProgramaEnsinoService.delete(programa);
-        }
-        try {
-            getService().delete(id);
-        } catch (Exception ex) {
+	public PessoaInstituicaoController(ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService) {
+		this.participacaoProgramaEnsinoService = participacaoProgramaEnsinoService;
+	}
 
-        }
+	@Override
+	protected CrudService<PessoaInstituicao, Long> getService() {
+		return pessoaInstituicaoService;
+	}
 
-    }
+	@GetMapping("instituicao/{instituicaoId}")
+	public List<PessoaInstituicao> findByInstituicao(@PathVariable Integer instituicaoId) {
+		return pessoaInstituicaoService.findPessoaInstituicao(usuarioAccessor.getUsuarioId(), instituicaoId);
+	}
+
+	@GetMapping("instituicao-sem-usuario/{instituicaoId}")
+	public List<PessoaInstituicao> findByInstituicaoSemUsuario(@PathVariable Integer instituicaoId) {
+		return pessoaInstituicaoService.findByInstituicao(instituicaoId);
+	}
+
+	@GetMapping("instituicoes/{pessoaId}")
+	public List<PessoaInstituicao> findByPessoaId(@PathVariable Long pessoaId) {
+		return pessoaInstituicaoService.findByPessoaId(pessoaId);
+	}
+
+	@Override
+	@DeleteMapping("{id}")
+	public void delete(@PathVariable Long id) {
+		for (ParticipacaoProgramaEnsino programa : participacaoProgramaEnsinoService.findParticipacaoPrograma(id)) {
+			participacaoProgramaEnsinoService.delete(programa);
+		}
+		try {
+			getService().delete(id);
+		} catch (Exception ex) {
+
+		}
+
+	}
 }

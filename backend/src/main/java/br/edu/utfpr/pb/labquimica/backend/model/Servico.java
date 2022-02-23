@@ -20,22 +20,17 @@ import java.io.Serializable;
 @Table
 @EqualsAndHashCode(of = "id")
 public class Servico implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @ManyToOne()
-    @JoinColumn(name = "equipamento_id", referencedColumnName = "id")
-    @NotNull(message = ValidationMessages.EquipamentoNaoPodeSerVazio)
-    @JsonProperty( value = "equipamento", access = JsonProperty.Access.WRITE_ONLY)
-    private Equipamento equipamento;
+	@ManyToOne()
+	@JoinColumn(name = "equipamento_id", referencedColumnName = "id")
+	@NotNull(message = ValidationMessages.EquipamentoNaoPodeSerVazio)
+	@JsonProperty(value = "equipamento", access = JsonProperty.Access.WRITE_ONLY)
+	private Equipamento equipamento;
 
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    @NotBlank(message = ValidationMessages.DescricaoNaoPodeSerVazio)
-    private String descricao;
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	@NotBlank(message = ValidationMessages.DescricaoNaoPodeSerVazio)
+	private String descricao;
 }
-
-
-
-
-

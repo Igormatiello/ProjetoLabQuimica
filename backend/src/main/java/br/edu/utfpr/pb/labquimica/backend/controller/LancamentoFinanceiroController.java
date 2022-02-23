@@ -13,28 +13,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("lancamento-financeiro")
 public class LancamentoFinanceiroController extends CrudController<LancamentoFinanceiro, Long> {
 
-    
-    private LancamentoFinanceiroService lancamentoFinanceiroService;
-    
-    public LancamentoFinanceiroController( LancamentoFinanceiroService lancamentoFinanceiroService) {
-        this.lancamentoFinanceiroService =lancamentoFinanceiroService;
-   }
+	private LancamentoFinanceiroService lancamentoFinanceiroService;
 
-    
-    private LancamentoFinanceiroRepository lancamentoFinanceiroRepository;
+	public LancamentoFinanceiroController(LancamentoFinanceiroService lancamentoFinanceiroService) {
+		this.lancamentoFinanceiroService = lancamentoFinanceiroService;
+	}
 
-    public LancamentoFinanceiroController( LancamentoFinanceiroRepository lancamentoFinanceiroRepository) {
-        this.lancamentoFinanceiroRepository =lancamentoFinanceiroRepository;
-   }
+	private LancamentoFinanceiroRepository lancamentoFinanceiroRepository;
 
-    
-    @Override
-    protected CrudService<LancamentoFinanceiro, Long> getService() {
-        return lancamentoFinanceiroService;
-    }
+	public LancamentoFinanceiroController(LancamentoFinanceiroRepository lancamentoFinanceiroRepository) {
+		this.lancamentoFinanceiroRepository = lancamentoFinanceiroRepository;
+	}
 
-    /*@GetMapping("buscaHistoricoFinanceiro/{id}")
-    public List<HistoricoFinanceiro> buscaHistoricoFinanceiro(@PathVariable Long id){
-        return LancamentoFinanceiroRepository.buscaLancamentoFinanceiro(id);
-    }*/
+	@Override
+	protected CrudService<LancamentoFinanceiro, Long> getService() {
+		return lancamentoFinanceiroService;
+	}
+
+	/*
+	 * @GetMapping("buscaHistoricoFinanceiro/{id}") public List<HistoricoFinanceiro>
+	 * buscaHistoricoFinanceiro(@PathVariable Long id){ return
+	 * LancamentoFinanceiroRepository.buscaLancamentoFinanceiro(id); }
+	 */
 }

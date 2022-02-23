@@ -31,63 +31,58 @@ import java.time.LocalDate;
 @EqualsAndHashCode(of = "id")
 public class LancamentoFinanceiro implements Serializable {
 
-    private static final long serialVersionUID = -5081207612645573073L;
+	private static final long serialVersionUID = -5081207612645573073L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @ManyToOne()
-    @JoinColumn(name = "formulario_id", referencedColumnName = "id")
-    private Formulario formulario;
+	@ManyToOne()
+	@JoinColumn(name = "formulario_id", referencedColumnName = "id")
+	private Formulario formulario;
 
-    @Column(nullable = false, updatable = false)
-    @CreatedDate
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate dataCriacao;
+	@Column(nullable = false, updatable = false)
+	@CreatedDate
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate dataCriacao;
 
-    @Column(nullable = false, updatable = false)
-    @CreatedDate
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    @NotNull(message = ValidationMessages.DataLancamentoNaoPodeSerVazio)
-    private LocalDate dataLancamento;
+	@Column(nullable = false, updatable = false)
+	@CreatedDate
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@NotNull(message = ValidationMessages.DataLancamentoNaoPodeSerVazio)
+	private LocalDate dataLancamento;
 
-    @Column(nullable = false)
-    @NotNull(message = ValidationMessages.QuantidadeNaoPodeSerVazio)
-    private int quantidade;
+	@Column(nullable = false)
+	@NotNull(message = ValidationMessages.QuantidadeNaoPodeSerVazio)
+	private int quantidade;
 
-    @Column(nullable = false)
-    @DecimalMin(message = ValidationMessages.ValorNaoPodeSerVazio, inclusive = false, value = "0.0")
-    private Double valor;
+	@Column(nullable = false)
+	@DecimalMin(message = ValidationMessages.ValorNaoPodeSerVazio, inclusive = false, value = "0.0")
+	private Double valor;
 
-    @Column(nullable = true)
-    @Enumerated(EnumType.STRING)
-    private UnidadeMedidaCobrancaEquipamento unidadeMedida;
+	@Column(nullable = true)
+	@Enumerated(EnumType.STRING)
+	private UnidadeMedidaCobrancaEquipamento unidadeMedida;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @NotNull(message = ValidationMessages.TipoLancamentoNaoPodeSerVazio)
-    private TipoLancamento tipoLancamento;
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	@NotNull(message = ValidationMessages.TipoLancamentoNaoPodeSerVazio)
+	private TipoLancamento tipoLancamento;
 
-    @Column(length = DefaultFields.DESCRICAO, nullable = false)
-    @NotBlank(message = ValidationMessages.DescricaoNaoPodeSerVazio)
-    private String descricao;
+	@Column(length = DefaultFields.DESCRICAO, nullable = false)
+	@NotBlank(message = ValidationMessages.DescricaoNaoPodeSerVazio)
+	private String descricao;
 
-    @Column(columnDefinition = PGTypes.Text, nullable = true)
-    private String observacao;
+	@Column(columnDefinition = PGTypes.Text, nullable = true)
+	private String observacao;
 
-    @Column(length = DefaultFields.NOTA_FISCAL, nullable = true)
-    private String numeroNotaFiscal;
+	@Column(length = DefaultFields.NOTA_FISCAL, nullable = true)
+	private String numeroNotaFiscal;
 
-    @Convert(converter = BooleanConverter.class)
-    @Column(columnDefinition = "char(1) default 'N'")
-    private boolean ehCancelada;
+	@Convert(converter = BooleanConverter.class)
+	@Column(columnDefinition = "char(1) default 'N'")
+	private boolean ehCancelada;
 
 }
-
-
-
-
-

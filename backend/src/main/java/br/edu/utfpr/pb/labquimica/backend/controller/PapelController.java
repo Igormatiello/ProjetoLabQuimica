@@ -14,15 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("papel")
-public class PapelController extends CrudController<Papel, Long>{
+public class PapelController extends CrudController<Papel, Long> {
 
-	
 	private PapelService papelService;
 
-	 public PapelController(PapelService papelService) {
-	        this.papelService =papelService;
-	   }
-	
+	public PapelController(PapelService papelService) {
+		this.papelService = papelService;
+	}
+
 	@Override
 	protected CrudService<Papel, Long> getService() {
 		return papelService;

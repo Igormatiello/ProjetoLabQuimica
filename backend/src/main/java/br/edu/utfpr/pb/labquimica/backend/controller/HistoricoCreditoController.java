@@ -1,6 +1,5 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 
-
 import br.edu.utfpr.pb.labquimica.backend.model.HistoricoCredito;
 import br.edu.utfpr.pb.labquimica.backend.model.Papel;
 import br.edu.utfpr.pb.labquimica.backend.repository.HistoricoCreditoRepository;
@@ -18,36 +17,31 @@ import java.util.List;
 @RequestMapping("historicoCredito")
 public class HistoricoCreditoController extends CrudController<HistoricoCredito, Long> {
 
-    @Autowired
-    private HistoricoCreditoService historicoCreditoService;
-    
-    public HistoricoCreditoController( HistoricoCreditoService historicoCreditoService) {
-        this.historicoCreditoService =historicoCreditoService;
-   }
-    
-    
+	@Autowired
+	private HistoricoCreditoService historicoCreditoService;
 
-  
-    private UserAccessor usuarioAccessor;
+	public HistoricoCreditoController(HistoricoCreditoService historicoCreditoService) {
+		this.historicoCreditoService = historicoCreditoService;
+	}
 
-    public HistoricoCreditoController( UserAccessor usuarioAccessor) {
-        this.usuarioAccessor =usuarioAccessor;
-   }
-    
-    
-    
-    @Override
-    protected CrudService<HistoricoCredito, Long> getService() {
-        return historicoCreditoService;
-    }
+	private UserAccessor usuarioAccessor;
 
-    @GetMapping("busca-por-professor")
-    public List<HistoricoCredito> findFormulariosPessoa() {
-        Papel papel = new Papel();
-        papel.setId(1L);
-        if(usuarioAccessor.getUsuario().getPapeis().contains(papel)){
-            return historicoCreditoService.findAll();
-        }
-        return historicoCreditoService.findByCreditoprofessorPessoaId(usuarioAccessor.getUsuario().getPessoa().getId());
-    }
+	public HistoricoCreditoController(UserAccessor usuarioAccessor) {
+		this.usuarioAccessor = usuarioAccessor;
+	}
+
+	@Override
+	protected CrudService<HistoricoCredito, Long> getService() {
+		return historicoCreditoService;
+	}
+
+	@GetMapping("busca-por-professor")
+	public List<HistoricoCredito> findFormulariosPessoa() {
+		Papel papel = new Papel();
+		papel.setId(1L);
+		if (usuarioAccessor.getUsuario().getPapeis().contains(papel)) {
+			return historicoCreditoService.findAll();
+		}
+		return historicoCreditoService.findByCreditoprofessorPessoaId(usuarioAccessor.getUsuario().getPessoa().getId());
+	}
 }

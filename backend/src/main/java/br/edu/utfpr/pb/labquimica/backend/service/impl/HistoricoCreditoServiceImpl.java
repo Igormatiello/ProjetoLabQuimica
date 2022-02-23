@@ -12,23 +12,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class HistoricoCreditoServiceImpl extends CrudServiceImpl<HistoricoCredito, Long> implements HistoricoCreditoService {
+public class HistoricoCreditoServiceImpl extends CrudServiceImpl<HistoricoCredito, Long>
+		implements HistoricoCreditoService {
 
-    
-    private HistoricoCreditoRepository historicoCreditoRepository;
-    
-    public HistoricoCreditoServiceImpl(HistoricoCreditoRepository historicoCreditoRepository) {
-        this.historicoCreditoRepository = historicoCreditoRepository;
-        }
-    
-    
+	private HistoricoCreditoRepository historicoCreditoRepository;
 
-    @Override
-    public List<HistoricoCredito> findByCreditoprofessorPessoaId(Long pessoaId) {
-        return historicoCreditoRepository.findByCreditoProfessorPessoaId(pessoaId);
-    }
-    @Override
-    protected JpaRepository<HistoricoCredito, Long> getRepository() {
-        return historicoCreditoRepository;
-    }
+	public HistoricoCreditoServiceImpl(HistoricoCreditoRepository historicoCreditoRepository) {
+		this.historicoCreditoRepository = historicoCreditoRepository;
+	}
+
+	@Override
+	public List<HistoricoCredito> findByCreditoprofessorPessoaId(Long pessoaId) {
+		return historicoCreditoRepository.findByCreditoProfessorPessoaId(pessoaId);
+	}
+
+	@Override
+	protected JpaRepository<HistoricoCredito, Long> getRepository() {
+		return historicoCreditoRepository;
+	}
 }

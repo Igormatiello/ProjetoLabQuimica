@@ -11,16 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProgramaEnsinoServiceImpl extends CrudServiceImpl<ProgramaEnsino, Long> implements ProgramaEnsinoService {
 
-    
-    private ProgramaEnsinoRepository programaEnsinoRepository;
-     
-    
-    public ProgramaEnsinoServiceImpl(ProgramaEnsinoRepository programaEnsinoRepository) {
-	    this.programaEnsinoRepository = programaEnsinoRepository;
-	    }
+	private ProgramaEnsinoRepository programaEnsinoRepository;
 
-    @Override
-    protected JpaRepository<ProgramaEnsino, Long> getRepository() {
-        return programaEnsinoRepository;
-    }
+	public ProgramaEnsinoServiceImpl(ProgramaEnsinoRepository programaEnsinoRepository) {
+		this.programaEnsinoRepository = programaEnsinoRepository;
+	}
+
+	@Override
+	protected JpaRepository<ProgramaEnsino, Long> getRepository() {
+		return programaEnsinoRepository;
+	}
 }
