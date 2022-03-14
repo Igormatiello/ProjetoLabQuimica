@@ -1,14 +1,13 @@
 package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
-import br.edu.utfpr.pb.labquimica.backend.model.PessoaInstituicao;
-import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
-import br.edu.utfpr.pb.labquimica.backend.repository.PessoaInstituicaoRepository;
-import br.edu.utfpr.pb.labquimica.backend.service.PessoaInstituicaoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import br.edu.utfpr.pb.labquimica.backend.model.PessoaInstituicao;
+import br.edu.utfpr.pb.labquimica.backend.repository.PessoaInstituicaoRepository;
+import br.edu.utfpr.pb.labquimica.backend.service.PessoaInstituicaoService;
 
 @Service
 public class PessoaInstituicaoServiceImpl extends CrudServiceImpl<PessoaInstituicao, Long>

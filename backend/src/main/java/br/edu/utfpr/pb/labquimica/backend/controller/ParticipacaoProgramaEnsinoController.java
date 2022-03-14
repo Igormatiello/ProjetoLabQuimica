@@ -1,16 +1,15 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 
-import br.edu.utfpr.pb.labquimica.backend.model.ParticipacaoProgramaEnsino;
-import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
-import br.edu.utfpr.pb.labquimica.backend.service.PapelService;
-import br.edu.utfpr.pb.labquimica.backend.service.ParticipacaoProgramaEnsinoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import br.edu.utfpr.pb.labquimica.backend.model.ParticipacaoProgramaEnsino;
+import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
+import br.edu.utfpr.pb.labquimica.backend.service.ParticipacaoProgramaEnsinoService;
 
 @RestController
 @RequestMapping("participacao-programa-ensino")

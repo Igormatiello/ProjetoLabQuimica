@@ -1,14 +1,11 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 
-import br.edu.utfpr.pb.labquimica.backend.model.ProgramaEnsino;
-import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
-import br.edu.utfpr.pb.labquimica.backend.service.InstituicaoService;
-import br.edu.utfpr.pb.labquimica.backend.service.ProgramaEnsinoService;
-import br.edu.utfpr.pb.labquimica.backend.service.UsuarioService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.edu.utfpr.pb.labquimica.backend.model.ProgramaEnsino;
+import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
+import br.edu.utfpr.pb.labquimica.backend.service.ProgramaEnsinoService;
 
 @RestController
 @RequestMapping("programa-ensino")

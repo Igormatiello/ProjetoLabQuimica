@@ -1,33 +1,34 @@
 package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
-import br.edu.utfpr.pb.labquimica.backend.enumerators.StatusFormulario;
-import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
-import br.edu.utfpr.pb.labquimica.backend.model.*;
-import br.edu.utfpr.pb.labquimica.backend.repository.EquipamentoRepository;
-import br.edu.utfpr.pb.labquimica.backend.service.FormularioService;
-import br.edu.utfpr.pb.labquimica.backend.service.HomeService;
-import br.edu.utfpr.pb.labquimica.backend.service.SolicitacaoCadastroService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import br.edu.utfpr.pb.labquimica.backend.enumerators.StatusFormulario;
+import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
+import br.edu.utfpr.pb.labquimica.backend.model.Formulario;
+import br.edu.utfpr.pb.labquimica.backend.model.IndicadorCabecalho;
+import br.edu.utfpr.pb.labquimica.backend.model.IndicadorFormularioByDay;
+import br.edu.utfpr.pb.labquimica.backend.model.IndicadorSolicitacaoCadastro;
+import br.edu.utfpr.pb.labquimica.backend.model.Indicadores;
+import br.edu.utfpr.pb.labquimica.backend.model.SolicitacaoCadastro;
+import br.edu.utfpr.pb.labquimica.backend.service.FormularioService;
+import br.edu.utfpr.pb.labquimica.backend.service.HomeService;
+import br.edu.utfpr.pb.labquimica.backend.service.SolicitacaoCadastroService;
+import lombok.NoArgsConstructor;
+
 @Service
+@NoArgsConstructor
 public class HomeServiceImpl implements HomeService {
 
-	@Autowired
 	private FormularioService formularioService;
-
-	public HomeServiceImpl(FormularioService formularioService) {
-		this.formularioService = formularioService;
-	}
 
 	private SolicitacaoCadastroService solicitacaoCadastroService;
 
-	public HomeServiceImpl(SolicitacaoCadastroService solicitacaoCadastroService) {
+	public HomeServiceImpl(FormularioService formularioService, SolicitacaoCadastroService solicitacaoCadastroService) {
+		this.formularioService = formularioService;
 		this.solicitacaoCadastroService = solicitacaoCadastroService;
 	}
 

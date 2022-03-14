@@ -1,46 +1,37 @@
 package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
-import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
-import br.edu.utfpr.pb.labquimica.backend.model.SolicitacaoCadastro;
-import br.edu.utfpr.pb.labquimica.backend.repository.EquipamentoRepository;
-import br.edu.utfpr.pb.labquimica.backend.repository.ProgramaEnsinoRepository;
-import br.edu.utfpr.pb.labquimica.backend.repository.SolicitacaoCadastroRepository;
-import br.edu.utfpr.pb.labquimica.backend.service.ConfEmailService;
-import br.edu.utfpr.pb.labquimica.backend.service.EmailService;
-import br.edu.utfpr.pb.labquimica.backend.service.EquipamentoService;
-import br.edu.utfpr.pb.labquimica.backend.service.SolicitacaoCadastroService;
-import br.edu.utfpr.pb.labquimica.backend.utils.Email;
-import br.edu.utfpr.pb.labquimica.backend.utils.ValidationMessages;
-import br.edu.utfpr.pb.labquimica.backend.validator.ValidaCpfCnpj;
-import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.List;
+import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
+import br.edu.utfpr.pb.labquimica.backend.model.SolicitacaoCadastro;
+import br.edu.utfpr.pb.labquimica.backend.repository.SolicitacaoCadastroRepository;
+import br.edu.utfpr.pb.labquimica.backend.service.EmailService;
+import br.edu.utfpr.pb.labquimica.backend.service.SolicitacaoCadastroService;
+import br.edu.utfpr.pb.labquimica.backend.utils.Email;
+import br.edu.utfpr.pb.labquimica.backend.utils.ValidationMessages;
+import br.edu.utfpr.pb.labquimica.backend.validator.ValidaCpfCnpj;
+import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
+import lombok.NoArgsConstructor;
 
 @Service
+@NoArgsConstructor
 public class SolicitacaoCadastroServiceImpl extends CrudServiceImpl<SolicitacaoCadastro, Long>
 		implements SolicitacaoCadastroService {
 
 	private SolicitacaoCadastroRepository solicitacaoCadastroRepository;
-
-	public SolicitacaoCadastroServiceImpl(SolicitacaoCadastroRepository solicitacaoCadastroRepository) {
-		this.solicitacaoCadastroRepository = solicitacaoCadastroRepository;
-	}
-
 	private PessoaServiceImpl pessoaService;
-
-	public SolicitacaoCadastroServiceImpl(PessoaServiceImpl pessoaService) {
-		this.pessoaService = pessoaService;
-	}
-
 	private EmailService emailService;
 
-	public SolicitacaoCadastroServiceImpl(EmailService emailService) {
+	public SolicitacaoCadastroServiceImpl(SolicitacaoCadastroRepository solicitacaoCadastroRepository,
+			PessoaServiceImpl pessoaService, EmailService emailService) {
+		this.solicitacaoCadastroRepository = solicitacaoCadastroRepository;
+		this.pessoaService = pessoaService;
 		this.emailService = emailService;
 	}
 

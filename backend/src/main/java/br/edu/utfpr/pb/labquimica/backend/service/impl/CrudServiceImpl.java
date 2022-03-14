@@ -1,14 +1,15 @@
 package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
-import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
+import java.io.Serializable;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
-import java.util.List;
+import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
 
 public abstract class CrudServiceImpl<T, ID extends Serializable> implements CrudService<T, ID> {
 

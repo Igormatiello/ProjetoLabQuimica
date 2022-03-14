@@ -1,19 +1,16 @@
 package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
-import br.edu.utfpr.pb.labquimica.backend.model.Pessoa;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
 import br.edu.utfpr.pb.labquimica.backend.model.Usuario;
-import br.edu.utfpr.pb.labquimica.backend.repository.EquipamentoRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.PessoaInstituicaoRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.PessoaRepository;
 import br.edu.utfpr.pb.labquimica.backend.repository.UsuarioRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.UsuarioService;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.DadosPessoaViewModel;
-import net.bytebuddy.implementation.bind.annotation.Super;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 //import org.springframework.beans.BeanInstantiationException;
 //import  java.lang.NoSuchMethodException;
@@ -22,7 +19,7 @@ public class UsuarioServiceImpl extends CrudServiceImpl<Usuario, Long> implement
 
 	private UsuarioRepository userRepository;
 
-	UsuarioServiceImpl() {
+	public UsuarioServiceImpl() {
 
 	}
 

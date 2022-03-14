@@ -1,20 +1,26 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.edu.utfpr.pb.labquimica.backend.model.CreditoProfessor;
-import br.edu.utfpr.pb.labquimica.backend.model.Pessoa;
 import br.edu.utfpr.pb.labquimica.backend.repository.CreditoProfessorRepository;
-import br.edu.utfpr.pb.labquimica.backend.service.ConfEmailService;
 import br.edu.utfpr.pb.labquimica.backend.service.CreditoProfessorService;
 import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
 import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 @RestController
 @RequestMapping("creditoProfessor")
+@NoArgsConstructor
 public class CreditoProfessorController extends CrudController<CreditoProfessor, Long> {
 
 	private CreditoProfessorService creditoProfessorService;

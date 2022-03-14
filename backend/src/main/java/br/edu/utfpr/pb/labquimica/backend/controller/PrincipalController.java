@@ -1,30 +1,26 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 
-import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
-import br.edu.utfpr.pb.labquimica.backend.service.ParticipacaoProgramaEnsinoService;
-import br.edu.utfpr.pb.labquimica.backend.service.UsuarioService;
-import br.edu.utfpr.pb.labquimica.backend.viewmodels.DadosPessoaViewModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.security.Principal;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
+import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
+import br.edu.utfpr.pb.labquimica.backend.service.UsuarioService;
+import br.edu.utfpr.pb.labquimica.backend.viewmodels.DadosPessoaViewModel;
+import lombok.NoArgsConstructor;
 
 @RestController
 @RequestMapping("session")
+@NoArgsConstructor
 public class PrincipalController {
 
 	private UserAccessor usuarioAccessor;
-
-	public PrincipalController(UserAccessor usuarioAccessor) {
-		this.usuarioAccessor = usuarioAccessor;
-	}
-
 	private UsuarioService usuarioService;
 
-	public PrincipalController(UsuarioService usuarioService) {
+	public PrincipalController(UserAccessor usuarioAccessor, UsuarioService usuarioService) {
+		this.usuarioAccessor = usuarioAccessor;
 		this.usuarioService = usuarioService;
 	}
 

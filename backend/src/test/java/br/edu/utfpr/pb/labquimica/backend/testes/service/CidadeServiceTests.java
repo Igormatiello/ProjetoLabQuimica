@@ -1,7 +1,6 @@
 package br.edu.utfpr.pb.labquimica.backend.testes.service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
@@ -14,9 +13,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.edu.utfpr.pb.labquimica.backend.model.Cidade;
-import br.edu.utfpr.pb.labquimica.backend.model.Papel;
-import br.edu.utfpr.pb.labquimica.backend.model.PessoaInstituicao;
-import br.edu.utfpr.pb.labquimica.backend.model.Usuario;
 import br.edu.utfpr.pb.labquimica.backend.repository.CidadeRepository;
 import br.edu.utfpr.pb.labquimica.backend.service.impl.CidadeServiceImpl;
 import br.edu.utfpr.pb.labquimica.backend.utils.ValidationMessages;
@@ -160,6 +156,7 @@ public class CidadeServiceTests {
 
 		Assertions.assertThat(resultado).isNotEmpty().hasSize(1).contains(cidade1, cidade2);
 
+		System.out.print("teste do igor 3");
 	}
 
 }

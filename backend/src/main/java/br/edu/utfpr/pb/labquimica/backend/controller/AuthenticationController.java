@@ -1,12 +1,7 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 
-import br.edu.utfpr.pb.labquimica.backend.AppConstant;
-import br.edu.utfpr.pb.labquimica.backend.model.Usuario;
-import br.edu.utfpr.pb.labquimica.backend.security.TokenUtils;
-import br.edu.utfpr.pb.labquimica.backend.security.model.AuthenticationRequest;
-import br.edu.utfpr.pb.labquimica.backend.security.model.AuthenticationResponse;
-import br.edu.utfpr.pb.labquimica.backend.service.AnexoFormularioService;
-import br.edu.utfpr.pb.labquimica.backend.service.impl.UsuarioServiceImpl;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,12 +10,23 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
+import br.edu.utfpr.pb.labquimica.backend.AppConstant;
+import br.edu.utfpr.pb.labquimica.backend.model.Usuario;
+import br.edu.utfpr.pb.labquimica.backend.security.TokenUtils;
+import br.edu.utfpr.pb.labquimica.backend.security.model.AuthenticationRequest;
+import br.edu.utfpr.pb.labquimica.backend.security.model.AuthenticationResponse;
+import br.edu.utfpr.pb.labquimica.backend.service.impl.UsuarioServiceImpl;
+import lombok.NoArgsConstructor;
 
 @RestController
 @RequestMapping("auth")
+@NoArgsConstructor
 public class AuthenticationController {
 
 	private AuthenticationManager authenticationManager;
@@ -30,6 +36,7 @@ public class AuthenticationController {
 
 	}
 
+	@Autowired
 	private TokenUtils tokenUtils;
 
 	public AuthenticationController(TokenUtils tokenUtils) {

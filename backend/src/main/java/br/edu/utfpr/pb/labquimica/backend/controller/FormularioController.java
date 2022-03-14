@@ -1,44 +1,43 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 
-import br.edu.utfpr.pb.labquimica.backend.enumerators.StatusFormulario;
-import br.edu.utfpr.pb.labquimica.backend.model.Formulario;
-import br.edu.utfpr.pb.labquimica.backend.model.Instituicao;
-import br.edu.utfpr.pb.labquimica.backend.model.PessoaInstituicao;
-import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
-import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
-import br.edu.utfpr.pb.labquimica.backend.service.EquipamentoService;
-import br.edu.utfpr.pb.labquimica.backend.service.FormularioService;
-import br.edu.utfpr.pb.labquimica.backend.service.InstituicaoService;
-import br.edu.utfpr.pb.labquimica.backend.viewmodels.FormularioAnaliseViewModel;
-import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.Valid;
-import java.text.Normalizer;
-import java.util.List;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import br.edu.utfpr.pb.labquimica.backend.enumerators.StatusFormulario;
+import br.edu.utfpr.pb.labquimica.backend.model.Formulario;
+import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
+import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
+import br.edu.utfpr.pb.labquimica.backend.service.FormularioService;
+import br.edu.utfpr.pb.labquimica.backend.viewmodels.FormularioAnaliseViewModel;
+import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
+import lombok.NoArgsConstructor;
 
 @RestController
 @RequestMapping("formulario")
+@NoArgsConstructor
 public class FormularioController extends CrudController<Formulario, Long> {
 
 	private FormularioService formularioService;
-
-	public FormularioController(FormularioService formularioService) {
-		this.formularioService = formularioService;
-	}
-
 	private UserAccessor usuarioAccessor;
 
-	public FormularioController(UserAccessor usuarioAccessor) {
+	public FormularioController(FormularioService formularioService, UserAccessor usuarioAccessor) {
+		this.formularioService = formularioService;
 		this.usuarioAccessor = usuarioAccessor;
 	}
 

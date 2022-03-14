@@ -1,30 +1,28 @@
 package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
-import br.edu.utfpr.pb.labquimica.backend.model.CreditoProfessor;
-import br.edu.utfpr.pb.labquimica.backend.repository.CreditoProfessorRepository;
-import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
-import br.edu.utfpr.pb.labquimica.backend.service.CreditoProfessorService;
-import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.time.LocalDate;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
-import java.time.LocalDate;
+import br.edu.utfpr.pb.labquimica.backend.model.CreditoProfessor;
+import br.edu.utfpr.pb.labquimica.backend.repository.CreditoProfessorRepository;
+import br.edu.utfpr.pb.labquimica.backend.service.CreditoProfessorService;
+import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
+import lombok.NoArgsConstructor;
 
 @Service
+@NoArgsConstructor
 public class CreditoProfessorServiceImpl extends CrudServiceImpl<CreditoProfessor, Long>
 		implements CreditoProfessorService {
 
 	private CreditoProfessorRepository creditoProfessorRepository;
 
-	public CreditoProfessorServiceImpl(CreditoProfessorRepository creditoProfessorRepository) {
-		this.creditoProfessorRepository = creditoProfessorRepository;
-	}
-
 	private CreditoProfessorService creditoProfessorService;
 
-	public CreditoProfessorServiceImpl(CreditoProfessorService creditoProfessorService) {
+	public CreditoProfessorServiceImpl(CreditoProfessorRepository creditoProfessorRepository,
+			CreditoProfessorService creditoProfessorService) {
+		this.creditoProfessorRepository = creditoProfessorRepository;
 		this.creditoProfessorService = creditoProfessorService;
 	}
 

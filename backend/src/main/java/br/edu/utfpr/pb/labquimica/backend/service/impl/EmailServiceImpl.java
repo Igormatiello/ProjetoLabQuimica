@@ -1,20 +1,22 @@
 package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
-import br.edu.utfpr.pb.labquimica.backend.model.ConfEmail;
-import br.edu.utfpr.pb.labquimica.backend.service.ConfEmailService;
-import br.edu.utfpr.pb.labquimica.backend.service.EmailService;
-import br.edu.utfpr.pb.labquimica.backend.utils.Email;
+import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.mail.internet.MimeMessage;
-import java.util.Map;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import br.edu.utfpr.pb.labquimica.backend.model.ConfEmail;
+import br.edu.utfpr.pb.labquimica.backend.service.ConfEmailService;
+import br.edu.utfpr.pb.labquimica.backend.service.EmailService;
+import br.edu.utfpr.pb.labquimica.backend.utils.Email;
 
 @Service
 public class EmailServiceImpl implements EmailService {

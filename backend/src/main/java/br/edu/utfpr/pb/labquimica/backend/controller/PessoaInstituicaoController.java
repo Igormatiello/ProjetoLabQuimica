@@ -1,42 +1,38 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.edu.utfpr.pb.labquimica.backend.model.ParticipacaoProgramaEnsino;
 import br.edu.utfpr.pb.labquimica.backend.model.PessoaInstituicao;
-import br.edu.utfpr.pb.labquimica.backend.model.Usuario;
 import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
 import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
 import br.edu.utfpr.pb.labquimica.backend.service.ParticipacaoProgramaEnsinoService;
 import br.edu.utfpr.pb.labquimica.backend.service.PessoaInstituicaoService;
-import br.edu.utfpr.pb.labquimica.backend.service.PessoaService;
-import br.edu.utfpr.pb.labquimica.backend.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 @RestController
 @RequestMapping("pessoa-instituicao")
+@NoArgsConstructor
 public class PessoaInstituicaoController extends CrudController<PessoaInstituicao, Long> {
 
 	private PessoaInstituicaoService pessoaInstituicaoService;
 
-	public PessoaInstituicaoController(PessoaInstituicaoService pessoaInstituicaoService) {
-		this.pessoaInstituicaoService = pessoaInstituicaoService;
-	}
-
 	private UserAccessor usuarioAccessor;
-
-	public PessoaInstituicaoController(UserAccessor usuarioAccessor) {
-		this.usuarioAccessor = usuarioAccessor;
-	}
 
 	private ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService;
 
-	public PessoaInstituicaoController(ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService) {
+	public PessoaInstituicaoController(PessoaInstituicaoService pessoaInstituicaoService, UserAccessor usuarioAccessor,
+			ParticipacaoProgramaEnsinoService participacaoProgramaEnsinoService) {
+		this.pessoaInstituicaoService = pessoaInstituicaoService;
+		this.usuarioAccessor = usuarioAccessor;
 		this.participacaoProgramaEnsinoService = participacaoProgramaEnsinoService;
+
 	}
 
 	@Override

@@ -1,33 +1,30 @@
 package br.edu.utfpr.pb.labquimica.backend.controller;
 
-import br.edu.utfpr.pb.labquimica.backend.model.HistoricoCredito;
-import br.edu.utfpr.pb.labquimica.backend.model.Papel;
-import br.edu.utfpr.pb.labquimica.backend.repository.HistoricoCreditoRepository;
-import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
-import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
-import br.edu.utfpr.pb.labquimica.backend.service.HistoricoCreditoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import br.edu.utfpr.pb.labquimica.backend.model.HistoricoCredito;
+import br.edu.utfpr.pb.labquimica.backend.model.Papel;
+import br.edu.utfpr.pb.labquimica.backend.security.acessor.UserAccessor;
+import br.edu.utfpr.pb.labquimica.backend.service.CrudService;
+import br.edu.utfpr.pb.labquimica.backend.service.HistoricoCreditoService;
+import lombok.NoArgsConstructor;
 
 @RestController
 @RequestMapping("historicoCredito")
+@NoArgsConstructor
 public class HistoricoCreditoController extends CrudController<HistoricoCredito, Long> {
 
-	@Autowired
 	private HistoricoCreditoService historicoCreditoService;
-
-	public HistoricoCreditoController(HistoricoCreditoService historicoCreditoService) {
-		this.historicoCreditoService = historicoCreditoService;
-	}
-
 	private UserAccessor usuarioAccessor;
 
-	public HistoricoCreditoController(UserAccessor usuarioAccessor) {
-		this.usuarioAccessor = usuarioAccessor;
+	public HistoricoCreditoController(HistoricoCreditoService historicoCreditoService, UserAccessor usuarioAcessor) {
+
+		this.usuarioAccessor = usuarioAcessor;
+		this.historicoCreditoService = historicoCreditoService;
 	}
 
 	@Override

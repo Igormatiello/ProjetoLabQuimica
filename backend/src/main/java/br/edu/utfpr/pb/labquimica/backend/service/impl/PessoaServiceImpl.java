@@ -1,83 +1,60 @@
 package br.edu.utfpr.pb.labquimica.backend.service.impl;
 
-import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
-import br.edu.utfpr.pb.labquimica.backend.model.*;
-import br.edu.utfpr.pb.labquimica.backend.repository.EquipamentoRepository;
-import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
-import br.edu.utfpr.pb.labquimica.backend.repository.PessoaRepository;
-import br.edu.utfpr.pb.labquimica.backend.repository.ProgramaEnsinoRepository;
-import br.edu.utfpr.pb.labquimica.backend.service.EmailService;
-import br.edu.utfpr.pb.labquimica.backend.service.PessoaInstituicaoService;
-import br.edu.utfpr.pb.labquimica.backend.service.PessoaService;
-import br.edu.utfpr.pb.labquimica.backend.utils.Email;
-import br.edu.utfpr.pb.labquimica.backend.utils.StringUtils;
-import br.edu.utfpr.pb.labquimica.backend.utils.ValidationMessages;
-import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
-import br.edu.utfpr.pb.labquimica.backend.viewmodels.SolicitacaoCadastroViewModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.HashSet;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import java.util.HashSet;
+import br.edu.utfpr.pb.labquimica.backend.enumerators.TipoPessoa;
+import br.edu.utfpr.pb.labquimica.backend.model.Papel;
+import br.edu.utfpr.pb.labquimica.backend.model.ParticipacaoProgramaEnsino;
+import br.edu.utfpr.pb.labquimica.backend.model.Pessoa;
+import br.edu.utfpr.pb.labquimica.backend.model.PessoaInstituicao;
+import br.edu.utfpr.pb.labquimica.backend.model.Usuario;
+import br.edu.utfpr.pb.labquimica.backend.repository.InstituicaoRepository;
+import br.edu.utfpr.pb.labquimica.backend.repository.PessoaRepository;
+import br.edu.utfpr.pb.labquimica.backend.repository.ProgramaEnsinoRepository;
+import br.edu.utfpr.pb.labquimica.backend.service.EmailService;
+import br.edu.utfpr.pb.labquimica.backend.service.PessoaService;
+import br.edu.utfpr.pb.labquimica.backend.utils.Email;
+import br.edu.utfpr.pb.labquimica.backend.utils.StringUtils;
+import br.edu.utfpr.pb.labquimica.backend.utils.ValidationMessages;
+import br.edu.utfpr.pb.labquimica.backend.viewmodels.ResultadoOperacaoViewModel;
+import br.edu.utfpr.pb.labquimica.backend.viewmodels.SolicitacaoCadastroViewModel;
+import lombok.NoArgsConstructor;
 
 @Service
+@NoArgsConstructor
 public class PessoaServiceImpl extends CrudServiceImpl<Pessoa, Long> implements PessoaService {
-	@Autowired
+
 	private PessoaRepository pessoaRepository;
 
-	public PessoaServiceImpl(PessoaRepository pessoaRepository) {
-		this.pessoaRepository = pessoaRepository;
-	}
-
 	private UsuarioServiceImpl usuarioService;
-
-	public PessoaServiceImpl(UsuarioServiceImpl usuarioService) {
-		this.usuarioService = usuarioService;
-
-	}
-
 	private InstituicaoRepository instituicaoRepository;
-
-	public PessoaServiceImpl(InstituicaoRepository instituicaoRepository) {
-		this.instituicaoRepository = instituicaoRepository;
-	}
-
 	private ProgramaEnsinoRepository programaEnsinoRepository;
-
-	public PessoaServiceImpl(ProgramaEnsinoRepository programaEnsinoRepository) {
-		this.programaEnsinoRepository = programaEnsinoRepository;
-	}
-
 	private PessoaInstituicaoServiceImpl pessoaInstituicaoService;
-
-	public PessoaServiceImpl(PessoaInstituicaoServiceImpl pessoaInstituicaoService) {
-		this.pessoaInstituicaoService = pessoaInstituicaoService;
-	}
-
 	private SolicitacaoCadastroServiceImpl solicitacaoCadastroService;
-
-	public PessoaServiceImpl(SolicitacaoCadastroServiceImpl solicitacaoCadastroService) {
-		this.solicitacaoCadastroService = solicitacaoCadastroService;
-	}
-
 	private ParticipacaoProgramaEnsinoServiceImpl participacaoProgramaEnsinoService;
-
-	public PessoaServiceImpl(ParticipacaoProgramaEnsinoServiceImpl participacaoProgramaEnsinoService) {
-		this.participacaoProgramaEnsinoService = participacaoProgramaEnsinoService;
-	}
-
 	private PapelServiceImpl papelService;
-
-	public PessoaServiceImpl(PapelServiceImpl papelService) {
-		this.papelService = papelService;
-	}
-
 	private EmailService emailService;
 
-	public PessoaServiceImpl(EmailService emailService) {
+	public PessoaServiceImpl(PessoaRepository pessoaRepository, UsuarioServiceImpl usuarioService,
+			InstituicaoRepository instituicaoRepository, ProgramaEnsinoRepository programaEnsinoRepository,
+			PessoaInstituicaoServiceImpl pessoaInstituicaoService,
+			SolicitacaoCadastroServiceImpl solicitacaoCadastroService,
+			ParticipacaoProgramaEnsinoServiceImpl participacaoProgramaEnsinoService, PapelServiceImpl papelService,
+			EmailService emailService) {
+		this.pessoaRepository = pessoaRepository;
+		this.usuarioService = usuarioService;
+		this.instituicaoRepository = instituicaoRepository;
+		this.programaEnsinoRepository = programaEnsinoRepository;
+		this.pessoaInstituicaoService = pessoaInstituicaoService;
+		this.solicitacaoCadastroService = solicitacaoCadastroService;
+		this.participacaoProgramaEnsinoService = participacaoProgramaEnsinoService;
+		this.papelService = papelService;
 		this.emailService = emailService;
 	}
 
