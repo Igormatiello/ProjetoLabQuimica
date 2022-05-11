@@ -29,27 +29,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationController {
 
+	@Autowired
 	private AuthenticationManager authenticationManager;
-
-	public AuthenticationController(AuthenticationManager authenticationManager) {
-		this.authenticationManager = authenticationManager;
-
-	}
-
 	@Autowired
 	private TokenUtils tokenUtils;
-
-	public AuthenticationController(TokenUtils tokenUtils) {
-		this.tokenUtils = tokenUtils;
-
-	}
-
+	@Autowired
 	private UsuarioServiceImpl usuarioService;
 
-	public AuthenticationController(UsuarioServiceImpl usuarioService) {
-		this.usuarioService = usuarioService;
-
-	}
 
 	@PostMapping(value = "")
 	public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest a)
