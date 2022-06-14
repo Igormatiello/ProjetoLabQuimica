@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
-    List<Cidade> findByNomeContainingIgnoreCaseOrderByNomeAsc(String nome);
-}
+	List<Cidade> findByNomeContainingIgnoreCaseOrderByNomeAsc(String nome);
 
+	List<Cidade> findByUf(String uf);
+
+}

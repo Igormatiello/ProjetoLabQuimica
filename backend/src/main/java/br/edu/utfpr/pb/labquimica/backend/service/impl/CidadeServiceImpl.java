@@ -25,6 +25,14 @@ public class CidadeServiceImpl extends CrudServiceImpl<Cidade, Integer> implemen
 
 	@Override
 	public List<Cidade> findByNomeContainingIgnoreCaseOrderByNomeAsc(String nome) {
+
 		return cidadeRepository.findByNomeContainingIgnoreCaseOrderByNomeAsc(nome);
 	}
+
+	@Override
+	public List<Cidade> findByUf(String uf) {
+
+		return cidadeRepository.findByUf(uf);
+	}
+
 }

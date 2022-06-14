@@ -18,24 +18,13 @@ import br.edu.utfpr.pb.labquimica.backend.viewmodels.DadosPessoaViewModel;
 public class UsuarioServiceImpl extends CrudServiceImpl<Usuario, Long> implements UsuarioService {
 
 	private UsuarioRepository userRepository;
-
-	public UsuarioServiceImpl() {
-
-	}
-
-	public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
-		this.userRepository = usuarioRepository;
-	}
-
 	private PessoaRepository pessoaRepository;
-
-	public UsuarioServiceImpl(PessoaRepository pessoaRepository) {
-		this.pessoaRepository = pessoaRepository;
-	}
-
 	private PessoaInstituicaoRepository pessoaInstituicaoRepository;
 
-	public UsuarioServiceImpl(PessoaInstituicaoRepository pessoaInstituicaoRepository) {
+	public UsuarioServiceImpl(UsuarioRepository usuarioRepository, PessoaRepository pessoaRepository,
+			PessoaInstituicaoRepository pessoaInstituicaoRepository) {
+		this.userRepository = usuarioRepository;
+		this.pessoaRepository = pessoaRepository;
 		this.pessoaInstituicaoRepository = pessoaInstituicaoRepository;
 	}
 

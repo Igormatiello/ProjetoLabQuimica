@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface CidadeService extends CrudService<Cidade, Integer> {
     List<Cidade> findByNomeContainingIgnoreCaseOrderByNomeAsc(String nome);
+    List<Cidade> findByUf(String uf );
 }

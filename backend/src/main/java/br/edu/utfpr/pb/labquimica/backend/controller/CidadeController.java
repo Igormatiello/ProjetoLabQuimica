@@ -29,9 +29,10 @@ public class CidadeController extends CrudController<Cidade, Integer> {
 	}
 
 	@GetMapping("busca")
-	public List<Cidade> findByNome(@RequestParam("nome") Optional<String> nome) {
-		if (!nome.isEmpty()) {
-			return cidadeService.findByNomeContainingIgnoreCaseOrderByNomeAsc(nome.get());
+	public List<Cidade> findByNome(@RequestParam("uf") String uf) {
+
+		if (!uf.isEmpty()) {
+			return cidadeService.findByUf(uf);
 		} else {
 			return cidadeService.findAll();
 		}
