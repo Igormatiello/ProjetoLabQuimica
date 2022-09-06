@@ -1,6 +1,6 @@
 # backend
 
-repositório do backend
+repositório do backend do sistema web do laboratório de química
 
 
 # Comandos GIT
